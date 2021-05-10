@@ -6,7 +6,7 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    Keyhive
 #define PRODUCT         SargentSofle
-#define DESCRIPTION     Sargent version of the Sofle
+#define DESCRIPTION     Rose version of the Sofle
 #define MASTER_RIGHT
 
 /* key matrix size */
@@ -38,4 +38,3 @@
 
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
-
