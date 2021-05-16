@@ -23,7 +23,7 @@
 #define _GAMINGLAYER 1
 
 
-enum layers { BASE, MBO, MEDR, NAVR, MOUR, NSSL, NSL, FUNL };
+enum layers { BASE, MBO, MEDR, NAVR, MOUR, NSSL, NSL, FUNL, GAME};
 
 //Default keymap. This can be changed in Via. Use oled.c and encoder.c to change beavior that Via cannot change.
 
@@ -44,12 +44,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 
-[0] = LAYOUT(
+[BASE] = LAYOUT(
   KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_PLUS,
-  KC_NO,  LGUI_T(KC_A),LALT_T(KC_S),LCTL_T(KC_D),LSFT_T(KC_F),KC_G,       KC_H,LSFT_T(KC_J),LCTL_T(KC_K),LALT_T(KC_L),LGUI_T(KC_SCLN),  KC_QUOT,
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_EQL,
+  KC_LGUI,  LCTL_T(KC_A),LALT_T(KC_S),LGUI_T(KC_D),LSFT_T(KC_F),KC_G,             KC_H, LSFT_T(KC_J), LGUI_T(KC_K), LALT_T(KC_L), LCTL_T(KC_SCLN),  KC_QUOT,
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, S(A(KC_A)),               KC_MEDIA_PLAY_PAUSE,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_SFTENT,
-  KC_LCTRL,KC_LALT, LT(MEDR, KC_ESC),  LT(NAVR,KC_BSPC ),  LT(MOUR, KC_TAB),  LT(NSSL, KC_ENT),  LT(NSL, KC_SPC),  LT(FUNL, KC_DEL),  KC_RALT, TG(1)
+  KC_LCTRL,KC_LALT, LT(MEDR, KC_DEL),  LT(NAVR,KC_BSPC ),  LT(MOUR, KC_TAB),  LT(NSSL, KC_ENT),  LT(NSL, KC_SPC),  LT(FUNL,KC_ESC ),  KC_RALT, TG(GAME)
 ),
 /*
  * GAMING
@@ -67,12 +67,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 
-[1] = LAYOUT(
-  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
+[GAME] = LAYOUT(
+  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_BSPC,
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
-  KC_BSPC,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_QUOT,  KC_SCLN,
+  KC_NO,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_QUOT,  KC_SCLN,
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,     KC_MEDIA_PLAY_PAUSE,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-                KC_ESC,KC_LALT,KC_LCTRL, MO(2), KC_SPC,            KC_BSPC,  MO(3), KC_ENT, KC_RGUI, TG(1)
+                KC_NO,KC_LALT,KC_LCTRL, KC_SPC, KC_LCTRL,            KC_ENT,  KC_SPC, KC_ENT, KC_RGUI, TG(GAME)
 ),
 
 
@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
    _______ , KC_RST,  KC_NA,   KC_NA,   KC_NA,   KC_NA,   SCMD(KC_Z),  LCMD(KC_V),  LCMD(KC_C), LCMD(KC_X),LCMD(KC_Z),_______ ,
    _______ ,KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NA,   KC_CAPS, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,_______ ,
-   _______ , KC_NA,   KC_ALGR, KC_NA,   KC_NA,   KC_NA, _______,   _______,    KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,_______ ,
+   _______ ,LCMD(KC_Z),  LCMD(KC_X), LCMD(KC_C),  LCMD(KC_V),  KC_NA, _______,   _______,    KC_INS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,_______ ,
     KC_NP,   KC_NP,   KC_NA,   KC_NA,   KC_NA,   KC_ENT,  KC_BSPC, KC_DEL,  KC_NP,   KC_NP
   ),
 
@@ -105,21 +105,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
 
   _______ ,  KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR, KC_NA,   KC_NA,   KC_NA,   KC_NA,   KC_RST,_______ ,
-  _______ ,  KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SLCK, KC_NA,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,_______ ,
+  _______ ,  KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SLCK, KC_NA,   KC_LSFT, KC_LGUI, KC_LALT,KC_LCTL,_______ ,
   _______ ,  KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,_______,  _______,   KC_NA,   KC_NA,   KC_NA,   KC_ALGR, KC_NA,_______ ,
     KC_NP,   KC_NP,   KC_APP,  KC_SPC,  KC_TAB,  KC_NA,   KC_NA,   KC_NA,   KC_NP,   KC_NP
   ),
   [NSL] = LAYOUT(
     KC_ESC, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
     _______ ,KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC, KC_NA,   KC_NA,   KC_NA,   KC_NA,   KC_RST,_______,
-    _______ ,KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,  KC_NA,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,_______,
-    _______ ,KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS, _______,  _______,  KC_NA,   KC_NA,   KC_NA,   KC_ALGR, KC_NA,_______,
+    _______ ,KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,  KC_NA,   KC_LSFT, KC_LGUI, KC_LALT,KC_LCTL,_______,
+    _______ ,KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS, _______,  _______,  KC_NA,   KC_NA,   KC_COMM,  KC_DOT,  KC_NA,_______,
     KC_NP,   KC_NP,   KC_DOT,  KC_0,    KC_MINS, KC_NA,   KC_NA,   KC_NA,   KC_NP,   KC_NP
   ),
   [NSSL] = LAYOUT(
     KC_ESC, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
     _______ , KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, KC_NA,   KC_NA,   KC_NA,   KC_NA,   KC_RST,_______,
-    _______ ,KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS, KC_NA,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,_______,
+    _______ ,KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS, KC_NA,   KC_LSFT, KC_LGUI, KC_LALT,KC_LCTL, _______,
     _______ ,  KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE,_______,  _______,   KC_NA,   KC_NA,   KC_NA,   KC_ALGR, KC_NA,_______,
     KC_NP,   KC_NP,   KC_LPRN, KC_RPRN, KC_UNDS, KC_NA,   KC_NA,   KC_NA,   KC_NP,   KC_NP
   ),[MOUR] = LAYOUT(

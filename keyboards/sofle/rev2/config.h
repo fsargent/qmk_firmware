@@ -41,7 +41,7 @@
 
 
 // default but used in macros
-#define TAPPING_TERM 300
+#define TAPPING_TERM 250
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
@@ -61,5 +61,8 @@
 #define MOUSEKEY_WHEEL_DELAY    0
 #undef MOUSEKEY_MAX_SPEED
 #define MOUSEKEY_MAX_SPEED      6
+#undef MOUSEKEY_WHEEL_INTERVAL
+#define MOUSEKEY_WHEEL_INTERVAL 50
+
 #undef MOUSEKEY_TIME_TO_MAX
 #define MOUSEKEY_TIME_TO_MAX    64

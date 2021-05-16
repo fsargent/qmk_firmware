@@ -26,19 +26,7 @@ static void render_logo(void) {
 }
 
 static void print_status_narrow(void) {
-    // Print current mode
-    oled_write_ln_P(PSTR("MODE"), false);
-    switch (get_highest_layer(layer_state)) {
-        case 0:
-            oled_write_P(PSTR("Norm\n"), false);
-             break;
-        case 1:
-            oled_write_P(PSTR("Game\n"), false);
-            break;
-        default:
-            oled_write_P(PSTR("Mod\n"), false);
-            break;
-    }
+
     // Print current layer
     // enum layers { BASE, MBO, MEDR, NAVR, MOUR, NSSL, NSL, FUNL };
 
@@ -65,6 +53,9 @@ static void print_status_narrow(void) {
             break;
         case 7:
             oled_write_P(PSTR("Fn\n"), false);
+            break;
+        case 8:
+            oled_write_P(PSTR("Game\n"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
