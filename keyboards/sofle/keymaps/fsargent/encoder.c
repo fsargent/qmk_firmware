@@ -24,7 +24,7 @@ uint16_t alt_tab_timer     = 0;      // we will be using them soon.
 
 void matrix_scan_user(void) {  // The very important timer.
     if (is_alt_tab_active) {
-        if (timer_elapsed(alt_tab_timer) > 1000) {
+        if (timer_elapsed(alt_tab_timer) > 500) {
             unregister_code(KC_LGUI);
             is_alt_tab_active = false;
         }
@@ -64,17 +64,17 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 alt_tab_timer = timer_read();
                 tap_code16(S(KC_TAB));
             }
-        } else if (IS_LAYER_ON(3)) {  // on Raise layer control chrome tab switching
-            if (clockwise) {
-                tap_code16(C(S(KC_TAB)));
-            } else {
-                tap_code16(C(KC_TAB));
-            }
-        } else {  // on other layers switch windows in OSX
-            if (clockwise) {
+        } else if (IS_LAYER_ON(3)) {  // on Raise layer controls window
+              if (clockwise) {
                 tap_code16(G(S(KC_GRV)));
             } else {
                 tap_code16(G(KC_GRV));
+            }
+        } else {  // on other layers chrome tab switching
+          if (clockwise) {
+                tap_code16(C(KC_TAB));
+            } else {
+                tap_code16(C(S(KC_TAB)));
             }
         }
     }

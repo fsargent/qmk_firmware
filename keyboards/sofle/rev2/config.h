@@ -40,6 +40,10 @@
 #define NO_ACTION_FUNCTION
 
 
+
+#define RGBLIGHT_LAYERS
+
+
 // default but used in macros
 #define TAPPING_TERM 200
 

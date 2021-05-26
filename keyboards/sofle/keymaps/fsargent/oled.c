@@ -32,41 +32,33 @@ static void render_logo(void) {
 static void print_status_narrow(void) {
 
     // Print current layer
-    // enum layers { BASE, MBO, MEDR, NAVR, MOUR, NSSL, NSL, FUNL };
+    // enum layers { BASE, GAME, NAV, FN, NUM, SYM  };
 
-    oled_write_ln_P(PSTR("LAYER"), false);
+
     switch (get_highest_layer(layer_state)) {
         case 0:
-        case 1:
             oled_write_P(PSTR("Base\n"), false);
             break;
+        case 1:
+            oled_write_P(PSTR("Game\n"), true);
+            break;
         case 2:
-            oled_write_P(PSTR("Media"), false);
+            oled_write_P(PSTR("Nav\n"), true);
             break;
         case 3:
-            oled_write_P(PSTR("Nav\n"), false);
+            oled_write_P(PSTR("Fn\n"), true);
             break;
         case 4:
-            oled_write_P(PSTR("Mouse"), false);
+            oled_write_P(PSTR("Num\n"), true);
             break;
         case 5:
-            oled_write_P(PSTR("Symbl"), false);
-            break;
-        case 6:
-            oled_write_P(PSTR("Num\n"), false);
-            break;
-        case 7:
-            oled_write_P(PSTR("Fn\n"), false);
-            break;
-        case 8:
-            oled_write_P(PSTR("Game\n"), false);
+            oled_write_P(PSTR("Symbl"), true);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
-    oled_write_P(PSTR("\n\n"), false);
     led_t led_usb_state = host_keyboard_led_state();
-    oled_write_ln_P(PSTR("//\nFelix"), led_usb_state.caps_lock);
+    oled_write_ln_P(PSTR("\n\n\n\n\n//\nFelix"), led_usb_state.caps_lock);
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {

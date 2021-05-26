@@ -6,6 +6,6 @@ VIA_ENABLE = no
 LTO_ENABLE = yes
 RGBLIGHT_ENABLE = yes
 MOUSEKEY_ENABLE = yes
-# AUTO_SHIFT_ENABLE = yes # Auto Shift
+AUTO_SHIFT_ENABLE = yes # Auto Shift
 RAW_ENABLE = yes
 TAP_DANCE_ENABLE=yes
