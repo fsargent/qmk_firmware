@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_1, KC_2, KC_3,
 		MO(1), KC_0, KC_DOT
 	),
-  
+
 	[FN] = LAYOUT(
 		KC_TRNS, KC_HOME, KC_PGUP,
 		KC_TRNS, KC_END, KC_PGDN,
@@ -55,11 +55,5 @@ void oled_task_user(void) {
       // Or use the write_ln shortcut over adding '\n' to the end of your string
       oled_write_ln_P(PSTR("Undef"), false);
   }
-
-  // Host Keyboard LED Status
-  uint8_t led_usb_state = host_keyboard_leds();
-  oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK) ? PSTR("NLCK ") : PSTR("     "), false);
-  oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPS ") : PSTR("       "), false);
-  oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLK") : PSTR("       "), false);
 }
 #endif
