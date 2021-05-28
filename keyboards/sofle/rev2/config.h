@@ -20,8 +20,7 @@
 #define MATRIX_ROW_PINS_RIGHT { C6, D7, E6, B4, B5 }
 #define MATRIX_COL_PINS_RIGHT { F6, F7, B1, B3, B2, B6 }
 #define DIODE_DIRECTION COL2ROW
-
-// #define TAPPING_TERM 100
+#define TAPPING_TERM 100
 #define DEBOUNCE 5
 
 /* encoder support */
