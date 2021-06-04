@@ -32,23 +32,8 @@ void matrix_scan_user(void) {  // The very important timer.
 }
 
 void encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 1) {
-        if (IS_LAYER_ON(0)) {  // on Raise layer control up down scrolling
-            if (clockwise) {
-                tap_code(KC_UP);
-            } else {
-                tap_code(KC_DOWN);
-            }
-        } else {  // on other layers emulate left right scrolling
-            if (clockwise) {
-                tap_code(KC_RIGHT);
-            } else {
-                tap_code(KC_LEFT);
-            }
-        }
-    } else if (index == 0) {
-        if (IS_LAYER_ON(0)) {  // OS Opt Tab
-
+    if (IS_LAYER_ON(0)) {  // on Raise layer control up down scrolling
+        if (index == 0) {
             if (clockwise) {
                 if (!is_alt_tab_active) {
                     is_alt_tab_active = true;
@@ -64,17 +49,53 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 alt_tab_timer = timer_read();
                 tap_code16(S(KC_TAB));
             }
-        } else if (IS_LAYER_ON(3)) {  // on Raise layer controls window
-              if (clockwise) {
+        } else if (index == 1) {
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
+        }
+    } else if (IS_LAYER_ON(1)) {  // on gaming layer meh up down
+        if (index == 0) {
+            if (clockwise) {
+                tap_code16(MEH(KC_DOWN));
+            } else {
+                tap_code16(MEH(KC_UP));
+            }
+        } else if (index == 1) {
+            if (clockwise) {
+                tap_code16(MEH(KC_LEFT));
+            } else {
+                tap_code16(MEH(KC_RIGHT));
+            }
+        }
+    } else if (IS_LAYER_ON(2)) {  // on Nav layer controls window
+        if (index == 0) {
+            if (clockwise) {
                 tap_code16(G(S(KC_GRV)));
             } else {
                 tap_code16(G(KC_GRV));
             }
-        } else {  // on other layers chrome tab switching
-          if (clockwise) {
+        } else if (index == 1) {
+            if (clockwise) {
+                tap_code(KC_DOWN);
+            } else {
+                tap_code(KC_UP);
+            }
+        }
+    } else {  // on other layers browser  tab switching
+        if (index == 0) {
+            if (clockwise) {
                 tap_code16(C(KC_TAB));
             } else {
                 tap_code16(C(S(KC_TAB)));
+            }
+        } else if (index == 1) {
+            if (clockwise) {
+                tap_code(KC_LEFT);
+            } else {
+                tap_code(KC_RIGHT);
             }
         }
     }

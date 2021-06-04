@@ -17,12 +17,12 @@ Flash using the correct command below:
 
 ```sh
 # for pro micro-based builds
-qmk flash -kb sofle/rev2 -km keyhive_via -bl avrdude-split-left
-qmk flash -kb sofle/rev2 -km keyhive_via -bl avrdude-split-right
+qmk flash -kb sofle/rev2 -km fsargent -bl avrdude-split-left
+qmk flash -kb sofle/rev2 -km fsargent -bl avrdude-split-right
 
 # for Elite C or dfu bootloader builds
-qmk flash -kb sofle/rev2 -km keyhive_via -bl dfu-split-left
-qmk flash -kb sofle/rev2 -km keyhive_via -bl dfu-split-right
+qmk flash -kb sofle/rev2 -km fsargent -bl dfu-split-left
+qmk flash -kb sofle/rev2 -km fsargent -bl dfu-split-right
 ```
 
 These commands can be mixed if, for example, you have an Elite C on the left and a pro micro on the right.

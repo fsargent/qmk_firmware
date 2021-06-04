@@ -40,19 +40,19 @@ static void print_status_narrow(void) {
             oled_write_P(PSTR("Base\n"), false);
             break;
         case 1:
-            oled_write_P(PSTR("Game\n"), true);
+            oled_write_P(PSTR("Win\n"), true);
             break;
         case 2:
             oled_write_P(PSTR("Nav\n"), true);
             break;
         case 3:
-            oled_write_P(PSTR("Fn\n"), true);
-            break;
-        case 4:
             oled_write_P(PSTR("Num\n"), true);
             break;
-        case 5:
+        case 4:
             oled_write_P(PSTR("Symbl"), true);
+            break;
+        case 5:
+            oled_write_P(PSTR("Game\n"), true);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
