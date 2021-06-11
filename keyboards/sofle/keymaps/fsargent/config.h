@@ -45,6 +45,8 @@ for more options.
 #define KC_SAI RGB_SAI
 #define KC_VAI RGB_VAI
 
+#define COMBO_VARIABLE_LEN
+#define COMBO_TERM 50
 
 #define PERMISSIVE_HOLD
 

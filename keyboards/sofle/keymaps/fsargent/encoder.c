@@ -31,7 +31,7 @@ void matrix_scan_user(void) {  // The very important timer.
     }
 }
 
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     if (IS_LAYER_ON(0)) {  // on Raise layer control up down scrolling
         if (index == 0) {
             if (clockwise) {
@@ -99,5 +99,6 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             }
         }
     }
+    return true;
 }
 #endif
