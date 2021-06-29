@@ -33,6 +33,18 @@ for more options.
 #define RGBLIGHT_DEFAULT_HUE 224
 #define RGBLIGHT_DEFAULT_SAT 10
 
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
+#define NO_ACTION_ONESHOT
+#define TAPPING_TOGGLE 2
+
+#ifndef NO_DEBUG
+#define NO_DEBUG
+#endif // !NO_DEBUG
+#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+#define NO_PRINT
+#endif // !NO_PRINT
+
 #define KC_NP KC_NO // key is not present
 #define KC_NA KC_NO // present but not available for use
 #define KC_NU KC_NO // available but not used
@@ -45,10 +57,10 @@ for more options.
 #define KC_SAI RGB_SAI
 #define KC_VAI RGB_VAI
 
-#define COMBO_VARIABLE_LEN
-#define COMBO_TERM 50
+#define COMBO_TERM 25
 
 #define PERMISSIVE_HOLD
+#define AUTO_SHIFT_TIMEOUT 150
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 // #define IGNORE_MOD_TAP_INTERRUPT

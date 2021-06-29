@@ -33,6 +33,11 @@ static void print_status_narrow(void) {
 
     // Print current layer
     // enum layers { BASE, GAME, NAV, FN, NUM, SYM  };
+    if (keymap_config.swap_lctl_lgui) {
+        oled_write_ln_P(PSTR("WIN"), false);
+    } else {
+        oled_write_ln_P(PSTR("OS X"), false);
+    }
 
 
     switch (get_highest_layer(layer_state)) {
@@ -40,25 +45,20 @@ static void print_status_narrow(void) {
             oled_write_P(PSTR("Base\n"), false);
             break;
         case 1:
-            oled_write_P(PSTR("Win\n"), true);
-            break;
-        case 2:
             oled_write_P(PSTR("Nav\n"), true);
             break;
+        case 2:
+            oled_write_P(PSTR("Symbl\n"), true);
+            break;
         case 3:
-            oled_write_P(PSTR("Num\n"), true);
-            break;
-        case 4:
-            oled_write_P(PSTR("Symbl"), true);
-            break;
-        case 5:
             oled_write_P(PSTR("Game\n"), true);
             break;
+
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
     led_t led_usb_state = host_keyboard_led_state();
-    oled_write_ln_P(PSTR("\n\n\n\n\n//\nFelix"), led_usb_state.caps_lock);
+    oled_write_ln_P(PSTR("\n\n\n\n\n\n\n//\nFelix"), led_usb_state.caps_lock);
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
