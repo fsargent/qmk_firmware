@@ -18,10 +18,11 @@
 // Sets up what the OLED screens display.
 
 #ifdef OLED_DRIVER_ENABLE
-#include "raw_hid.h"
-void raw_hid_receive(uint8_t *data, uint8_t length) {
-    raw_hid_send(data, length);
-}
+// #include "raw_hid.h"
+// void raw_hid_receive(uint8_t *data, uint8_t length) {
+//     raw_hid_send(data, length);
+// }
+
 
 static void render_logo(void) {
     static const char PROGMEM qmk_logo[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4, 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4, 0};
@@ -47,18 +48,22 @@ static void print_status_narrow(void) {
         case 1:
             oled_write_P(PSTR("Nav\n"), true);
             break;
-        case 2:
-            oled_write_P(PSTR("Symbl\n"), true);
-            break;
-        case 3:
+         case 2:
             oled_write_P(PSTR("Game\n"), true);
             break;
+        case 3:
+            oled_write_P(PSTR("Symbl\n"), true);
+            break;
+        case 4:
+            oled_write_P(PSTR("Nav\n"), true);
+            break;
+
 
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
-    led_t led_usb_state = host_keyboard_led_state();
-    oled_write_ln_P(PSTR("\n\n\n\n\n\n\n//\nFelix"), led_usb_state.caps_lock);
+    // led_t led_usb_state = host_keyboard_led_state();
+    // oled_write_ln_P(PSTR("\n\n\n\n\n\n\n//\nFelix"), led_usb_state.caps_lock);
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -70,9 +75,35 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return rotation;
 }
 
+
+
+void render_mod_status(void) {
+    bool blink = (timer_read() % 1000) < 500;
+    uint8_t modifiers = get_mods();
+        if (modifiers & MOD_MASK_SHIFT & MOD_MASK_ALT & MOD_MASK_CTRL) {
+            oled_write_ln_P(blink ? PSTR("$meh_") : PSTR("$meh "), false);
+        } else if (modifiers & MOD_MASK_CTRL) {
+            oled_write_ln_P(blink ? PSTR("$ctl_") : PSTR("$ctl "), false);
+        } else if (modifiers & MOD_MASK_SHIFT) {
+            oled_write_ln_P(blink ? PSTR("$sft_") : PSTR("$sft "), false);
+		} else if (modifiers & MOD_MASK_ALT) {
+            oled_write_ln_P(blink ? PSTR("$alt_") : PSTR("$alt "), false);
+        } else if (modifiers & MOD_MASK_GUI) {
+            oled_write_ln_P(blink ? PSTR("$gui_") : PSTR("$gui "), false);
+        } else {
+            oled_write_ln_P(blink ? PSTR("$_  ") : PSTR("$    "), false);
+        }
+}
+
+
 void oled_task_user(void) {
+
     if (is_keyboard_master()) {
         print_status_narrow();
+        oled_set_cursor(0,5);
+	    render_mod_status();
+	    oled_set_cursor(0,13);
+
     } else {
         render_logo();
     }

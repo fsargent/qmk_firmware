@@ -45,31 +45,11 @@ for more options.
 #define NO_PRINT
 #endif // !NO_PRINT
 
-#define KC_NP KC_NO // key is not present
-#define KC_NA KC_NO // present but not available for use
-#define KC_NU KC_NO // available but not used
-
-// non-KC_ keycodes
-#define KC_RST RESET
-#define KC_TOG RGB_TOG
-#define KC_MOD RGB_MOD
-#define KC_HUI RGB_HUI
-#define KC_SAI RGB_SAI
-#define KC_VAI RGB_VAI
-
 #define COMBO_TERM 25
 
 #define PERMISSIVE_HOLD
 #define AUTO_SHIFT_TIMEOUT 150
-
-// Prevent normal rollover on alphas from accidentally triggering mods.
-// #define IGNORE_MOD_TAP_INTERRUPT
-
-// Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
-// #define TAPPING_FORCE_HOLD
-
-// #define RETRO_TAPPING
-
+#define NO_AUTO_SHIFT_ALPHA
 // Recommended for heavy chording.
 #define QMK_KEYS_PER_SCAN 4
 
