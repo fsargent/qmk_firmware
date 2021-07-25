@@ -22,65 +22,82 @@
 
 
 
-enum layers { BASE, NAV, GAME, SYM,  WINNAV};
+enum layers { BASE, CMK, WIN, GAME, SYM, NAV, WINNAV};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	// Tab size 4
 
 	[BASE] = LAYOUT(
-		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
-		LT(SYM,KC_TAB),		KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,											KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_EQL,
-		MT(MOD_MEH,KC_ESC),	KC_A,	KC_S,	KC_D,	KC_F,	KC_G,											KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
-		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	G(KC_ENT),					TO(GAME),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	KC_LSFT,
-		MT(MOD_LCTL,KC_LBRC),MT(MOD_LALT,KC_RBRC),TT(SYM),CMD_T(KC_BSPC),LT(NAV, KC_SPC),		KC_ENT,		KC_SPC,		TT(SYM),	KC_LBRC,	KC_RBRC
+		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,																KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
+		LT(SYM,KC_TAB),		KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,																KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_EQL,
+		MT(MOD_MEH,KC_ESC),	KC_A,	KC_S,	KC_D,	KC_F,	KC_G,																KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
+		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	G(KC_ENT),										TO(CMK),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
+		MT(MOD_LCTL,KC_LBRC),MT(MOD_LALT,KC_RBRC),TT(SYM),CMD_T(KC_BSPC),MO(NAV),									LT(NAV, KC_ENT),		KC_SPC,		TT(SYM),	KC_LBRC,	KC_RBRC
 	),
-	[NAV]=LAYOUT(
-		C(KC_GRV),	G(KC_SLSH),	KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),													KC_NO,		KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_LCTL,
-		KC_TAB,		A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),													KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
-		C(KC_TAB),	A(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	A(KC_RGHT),													KC_WH_L,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_WH_R,	KC_LGUI,
-		KC_LSFT,	KC_HOME,	KC_PGDN,	G(KC_ENT),	KC_SPC,		KC_END,			G(KC_ENT),						TO(GAME),	KC_NO,		KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_BSLS,	KC_LSFT,
-					MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),	_______,	_______,	_______,				KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LBRC,	KC_RBRC
+	[CMK] = LAYOUT(
+		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,																KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
+		LT(SYM,KC_TAB),		KC_Q,	KC_W,	KC_F,	KC_P,	KC_B,																KC_J,		KC_L,		KC_U,		KC_Y,		KC_SCLN,	KC_EQL,
+		MT(MOD_MEH,KC_ESC),	KC_A,	KC_R,	KC_S,	KC_T,	KC_G,																KC_M,		KC_N,		KC_E,		KC_I,		KC_O,		KC_QUOT,
+		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_D,	KC_V,	G(KC_ENT),										TO(WIN),	KC_K,		KC_H,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
+		MT(MOD_LCTL,KC_LBRC),MT(MOD_LALT,KC_RBRC),TT(SYM),CMD_T(KC_BSPC),MO(NAV),									LT(NAV, KC_ENT),		KC_SPC,		TT(SYM),	KC_LBRC,	KC_RBRC
+	),
+	[WIN] = LAYOUT(
+		KC_GRV,				KC_1,	KC_2,		KC_3,		KC_4,		KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_BSPC,
+		KC_TAB,				KC_Q,	KC_W,		KC_E,		KC_R,		KC_T,											KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_EQL,
+		LT(NAV,KC_ESC),	    KC_A,	KC_S,		KC_D,		KC_F,		KC_G,											KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
+		KC_LSFT,			KC_Z,	KC_X,		KC_C,		KC_V,		KC_B,		TG(SYM),				TO(GAME),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
+		MT(MOD_LGUI,KC_LBRC),MT(MOD_LALT,KC_RBRC),TT(SYM),CTL_T(KC_BSPC),MO(NAV),							LT(NAV, KC_ENT),		KC_SPC,		TT(SYM),	KC_LBRC,	KC_RBRC
 	),
 	[GAME] = LAYOUT(
 		KC_GRV,			KC_1,	KC_2,		KC_3,		KC_4,		KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_BSPC,
 		KC_TAB,			KC_Q,	KC_W,		KC_E,		KC_R,		KC_T,											KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_EQL,
-		LT(SYM,KC_ESC),	KC_A,	KC_S,		KC_D,		KC_F,		KC_G,											KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
-		KC_LSFT,		KC_Z,	KC_X,		KC_C,		KC_V,		KC_B,		G(KC_ENT),				TO(BASE),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	KC_LSFT,
-								KC_LGUI,	KC_LALT,	TT(WINNAV),	KC_LCTL,	KC_SPC,					KC_ENT,		KC_SPC,		TT(SYM),	KC_LBRC,	KC_RBRC
+		KC_ESC,			KC_A,	KC_S,		KC_D,		KC_F,		KC_G,											KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
+		KC_LSFT,		KC_Z,	KC_X,		KC_C,		KC_V,		KC_B,		TG(SYM),				TO(BASE),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	KC_LSFT,
+						KC_LGUI,KC_LALT,	MO(NAV),	KC_LCTL,	KC_SPC,								KC_ENT,		KC_SPC,		TT(SYM),	KC_LBRC,	KC_RBRC
 	),
 	[SYM]	=	LAYOUT(
 		// C(G(KC_SPC)) is the OS X Emoji Editor
-		C(G(KC_SPC)),	KC_F1,		KC_F2,		KC_F3,		KC_F4,		KC_F5,												KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,		KC_F11,
-		KC_BSLS,		KC_BSPC,	KC_EQL,		KC_MINS, 	KC_EQL,		KC_BSPC,											KC_NO,	KC_P7,	KC_P8,	KC_P9,	KC_NLCK,	KC_F12,
-		KC_ENT,			KC_BSLS,	KC_QUOT,	KC_SCLN,	KC_QUOT,	KC_BSLS,											KC_NO,	KC_P4,	KC_P5,	KC_P6,	KC_NO,		KC_PSCR,
-		_______,		KC_SLSH,	KC_DOT,		KC_COMM,	KC_DOT,		KC_SLSH,		C(G(KC_SPC)),			TG(SYM),	KC_NO,	KC_P1,	KC_P2,	KC_P3,	KC_BSLS,	KC_NLCK,
-									KC_NO,		KC_NO,		TT(SYM),	_______,	_______,					_______,	_______,	KC_NO,	KC_0,	KC_DOT
+		C(G(KC_SPC)),	KC_F1,		KC_F2,		KC_F3,		KC_F4,		KC_F5,											KC_F6,		KC_F7,		KC_F8,		KC_F9,		KC_F10,		KC_F11,
+		KC_BSLS,		KC_BSPC,	KC_EQL,		KC_MINS, 	KC_EQL,		KC_BSPC,										KC_MINS,	KC_P7,		KC_P8,		KC_P9,		KC_NLCK,	KC_F12,
+		KC_ENT,			KC_BSLS,	KC_QUOT,	KC_SCLN,	KC_QUOT,	KC_BSLS,										KC_PLUS,	KC_P4,		KC_P5,		KC_P6,		KC_0,		KC_PSCR,
+		_______,		KC_SLSH,	KC_DOT,		KC_COMM,	KC_DOT,		KC_SLSH,	C(G(KC_SPC)),			TG(SYM),	KC_ASTR,	KC_P1,		KC_P2,		KC_P3,		KC_BSLS,	KC_NLCK,
+									KC_NO,		KC_NO,		TT(SYM),	_______,	_______,				_______,	_______,	KC_NO,		KC_0,		KC_DOT
 	),
-
+	[NAV]=LAYOUT(
+		C(KC_GRV),	G(KC_SLSH),	KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),										KC_NO,		KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_LCTL,
+		G(KC_TAB),	A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),										KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
+		C(KC_TAB),	A(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	A(KC_RGHT),										KC_WH_L,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_WH_R,	KC_LGUI,
+		KC_LSFT,	KC_HOME,	KC_PGDN,	G(KC_ENT),	KC_SPC,		KC_END,		G(KC_ENT),				TO(GAME),	KC_NO,		KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_BSLS,	KC_LSFT,
+					MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),	_______,	_______,	_______,	KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LBRC,	KC_RBRC
+	),
 	[WINNAV]=LAYOUT(
-		C(KC_GRV),	MEH(2),		C(KC_F2),	KC_WH_U,	KC_WH_R,	G(KC_ENT),										KC_VOLU,			KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_LCTL,
-		A(KC_TAB),	C(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		C(KC_DEL),										KC_VOLD,			KC_HOME,	KC_PGDN,	KC_PGUP,	KC_END,		KC_LALT,
-		C(KC_TAB),	C(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	C(KC_RGHT),										RGB_MODE_FORWARD,	KC_MS_L,	KC_MS_D,	KC_MS_U,	KC_MS_R,	KC_LGUI,
-		KC_LSFT,	KC_HOME,	KC_PGDN,	KC_SPC,		KC_SPC,		KC_END,		G(KC_ENT),				TG(GAME),	KC_MS_BTN5,			KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_BSLS,	KC_LSFT,
-								MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),_______,_______,_______,	KC_MS_BTN1,	KC_MS_BTN2,			KC_MS_BTN3,	KC_LPRN,	KC_RPRN
-	),
+		C(KC_GRV),	MEH(2),		C(KC_F2),	KC_WH_U,	KC_WH_R,	G(KC_ENT),										KC_NO,		KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_LCTL,
+		A(KC_TAB),	C(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		C(KC_DEL),										KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
+		C(KC_TAB),	C(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	C(KC_RGHT),										KC_WH_L,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_WH_R,	KC_LGUI,
+		KC_LSFT,	KC_HOME,	KC_PGDN,	KC_SPC,		KC_SPC,		KC_END,		G(KC_ENT),				TG(GAME),	KC_NO,		KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_BSLS,	KC_LSFT,
+								MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),_______,_______,_______,	KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LPRN,	KC_RPRN
+	)
 };
 
 enum combo_events {
-	LPAREN,
-	RPAREN,
-	PAREN,
-	CMD_BSPC,
-	CMD_ENTER,
-	CTRLC,
-	CTRLR,
-	CAL,
-  APW,
+    LPAREN,
+    RPAREN,
+    PAREN,
+    CMD_BSPC,
+    CMD_ENTER,
+    CTRLC,
+    CTRLR,
+    CAL,
+    APW,
+    DELWD,
+    EML,
+    PHONE,
+    EMA,
 	COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH; // remove the COMBO_COUNT define and use this instead!
 
-const uint16_t PROGMEM qwer_    [] = {KC_Q, KC_W, KC_E, KC_R, COMBO_END};
+const uint16_t PROGMEM qwer_combo[] = {KC_Q, KC_W, KC_E, KC_R, COMBO_END};
 const uint16_t PROGMEM asdf_combo[] = {KC_A, KC_S, KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM zxcv_combo[] = {KC_Z, KC_X, KC_C, KC_V, COMBO_END};
 
@@ -92,7 +109,13 @@ const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM qr_combo[] = {KC_Q, KC_R, COMBO_END};
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+
 const uint16_t PROGMEM cal_combo[] = {KC_C, KC_A, KC_L, COMBO_END};
+const uint16_t PROGMEM phone_combo[] = {KC_P, KC_Q,COMBO_END};
+const uint16_t PROGMEM eml_combo[] = {KC_E, KC_M, KC_L, COMBO_END};
+const uint16_t PROGMEM ema_combo[] = {KC_E, KC_A, KC_M, COMBO_END};
+
 
 
 combo_t key_combos[] = {
@@ -101,17 +124,25 @@ combo_t key_combos[] = {
 	[RPAREN] = COMBO_ACTION(cv_combo),
 	[CTRLC] = COMBO_ACTION(zxcv_combo),
 	[CMD_BSPC] = COMBO_ACTION(jklsemi_combo),
-	[CMD_ENTER]= COMBO_ACTION(asdf_combo),
+	[CMD_ENTER] = COMBO_ACTION(asdf_combo),
 	[CTRLR] = COMBO_ACTION(qr_combo),
 	[CAL] = COMBO_ACTION(cal_combo),
     [APW] = COMBO_ACTION(uiop_combo),
-	// Lock computer combo!
+    [EML]= COMBO_ACTION(eml_combo),
+    [PHONE]= COMBO_ACTION(phone_combo),
+    [EMA] = COMBO_ACTION(ema_combo),
+	[DELWD] = COMBO_ACTION(df_combo)
 };
 /* COMBO_ACTION(x) is same as COMBO(x, KC_NO) */
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
 	switch(combo_index) {
 
+		case DELWD:
+			if (pressed) {
+				tap_code16(A(KC_BSPC));
+			}
+			break;
 		case LPAREN:
 			if (pressed) {
 				SEND_STRING("(");
@@ -142,10 +173,25 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 			break;
 		case CAL:
 			if (pressed) {
-				SEND_STRING("Would you like to find a time on my calendar that works for you? https://felixsargent.com/calendar.");
+				SEND_STRING("https://felixsargent.com/calendar");
 				}
 			break;
-    case APW:
+        case EML:
+			if (pressed) {
+				SEND_STRING("felix.sargent@gmail.com");
+				}
+			break;
+        case EMA:
+			if (pressed) {
+				SEND_STRING("fsargent@atlassian.com");
+				}
+			break;
+        case PHONE:
+			if (pressed) {
+				SEND_STRING("4158606970");
+				}
+			break;
+        case APW:
 			if (pressed) {
 				SEND_STRING("XXX");
 				}
@@ -154,8 +200,8 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 			if (pressed) {
 			 tap_code16(G(KC_BSPC));
 						}
-						break;
-				case CMD_ENTER:
+			break;
+		case CMD_ENTER:
 			if (pressed) {
 			 tap_code16(G(KC_ENT));
 					}
@@ -166,19 +212,19 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 
 
 uint32_t layer_state_set_user(uint32_t state) {
-		switch (biton32(state)) {
-					case GAME:
-							autoshift_disable();
-							break;
-					default:
-							autoshift_enable();
-							break;
-					}
-		rgblight_set_layer_state(2, layer_state_cmp(state, 2));
-		rgblight_set_layer_state(3, layer_state_cmp(state, 1));
-		rgblight_set_layer_state(4, layer_state_cmp(state, 5));
-		rgblight_set_layer_state(5, layer_state_cmp(state, 4));
-		rgblight_set_layer_state(6, layer_state_cmp(state, 3));
+	switch (biton32(state)) {
+		case GAME:
+			autoshift_disable();
+		break;
+		default:
+			autoshift_enable();
+			break;
+	}
+// 		// rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+// 		// rgblight_set_layer_state(3, layer_state_cmp(state, 1));
+// 		// rgblight_set_layer_state(4, layer_state_cmp(state, 5));
+// 		// rgblight_set_layer_state(5, layer_state_cmp(state, 4));
+// 		// rgblight_set_layer_state(6, layer_state_cmp(state, 3));
 
 	return state;
 }

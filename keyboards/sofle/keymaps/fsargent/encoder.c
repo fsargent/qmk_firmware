@@ -30,6 +30,8 @@ void matrix_scan_user(void) {  // The very important timer.
         }
     }
 }
+// enum layers { BASE, CMK, WIN, GAME, SYM, NAV, WINNAV};
+
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (IS_LAYER_ON(0)) {  // on Raise layer control up down scrolling
@@ -73,9 +75,33 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (IS_LAYER_ON(2)) {  // on Nav layer controls window
         if (index == 0) {
             if (clockwise) {
-                tap_code16(G(S(KC_GRV)));
+                if (!is_alt_tab_active) {
+                    is_alt_tab_active = true;
+                    register_code(KC_LALT);
+                }
+                alt_tab_timer = timer_read();
+                tap_code(KC_TAB);
             } else {
-                tap_code16(G(KC_GRV));
+                if (!is_alt_tab_active) {
+                    is_alt_tab_active = true;
+                    register_code(KC_LALT);
+                }
+                alt_tab_timer = timer_read();
+                tap_code16(S(KC_TAB));
+            }
+        } else if (index == 1) {
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
+        }
+    } else if (IS_LAYER_ON(3)) {  // on Nav layer controls window
+        if (index == 0) {
+            if (clockwise) {
+                tap_code(KC_LEFT);
+            } else {
+                tap_code(KC_RIGHT);
             }
         } else if (index == 1) {
             if (clockwise) {
@@ -93,9 +119,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
         } else if (index == 1) {
             if (clockwise) {
-                tap_code(KC_LEFT);
+                tap_code16(C(S(KC_TAB)));
             } else {
-                tap_code(KC_RIGHT);
+                tap_code16(C(KC_TAB));
+
             }
         }
     }

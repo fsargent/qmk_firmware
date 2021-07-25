@@ -18,10 +18,6 @@
 // Sets up what the OLED screens display.
 
 #ifdef OLED_DRIVER_ENABLE
-// #include "raw_hid.h"
-// void raw_hid_receive(uint8_t *data, uint8_t length) {
-//     raw_hid_send(data, length);
-// }
 
 
 static void render_logo(void) {
@@ -33,29 +29,29 @@ static void render_logo(void) {
 static void print_status_narrow(void) {
 
     // Print current layer
-    // enum layers { BASE, GAME, NAV, FN, NUM, SYM  };
-    if (keymap_config.swap_lctl_lgui) {
-        oled_write_ln_P(PSTR("WIN"), false);
-    } else {
-        oled_write_ln_P(PSTR("OS X"), false);
-    }
-
+    // enum layers { BASE,	CMK, WIN, GAME, SYM, NAV, WINNAV};
 
     switch (get_highest_layer(layer_state)) {
         case 0:
-            oled_write_P(PSTR("Base\n"), false);
+            oled_write_P(PSTR("OS X\n"), false);
             break;
         case 1:
-            oled_write_P(PSTR("Nav\n"), true);
+            oled_write_P(PSTR("CMK\n"), false);
             break;
-         case 2:
-            oled_write_P(PSTR("Game\n"), true);
+        case 2:
+            oled_write_P(PSTR("WIN\n"), false);
             break;
         case 3:
-            oled_write_P(PSTR("Symbl\n"), true);
+            oled_write_P(PSTR("GAME\n"), false);
             break;
         case 4:
-            oled_write_P(PSTR("Nav\n"), true);
+            oled_write_P(PSTR("SYM\n"), true);
+            break;
+        case 5:
+            oled_write_P(PSTR("NAV\n"), true);
+            break;
+        case 6:
+            oled_write_P(PSTR("W NAV\n"), true);
             break;
 
 
