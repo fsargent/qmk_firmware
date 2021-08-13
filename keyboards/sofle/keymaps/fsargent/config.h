@@ -32,6 +32,8 @@ for more options.
 #define RGBLIGHT_LIMIT_VAL 60
 #define RGBLIGHT_DEFAULT_HUE 224
 #define RGBLIGHT_DEFAULT_SAT 10
+#define RGBLIGHT_SLEEP
+
 
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
@@ -46,7 +48,6 @@ for more options.
 #endif // !NO_PRINT
 
 #define COMBO_TERM 25
-
 #define PERMISSIVE_HOLD
 #define AUTO_SHIFT_TIMEOUT 150
 #define NO_AUTO_SHIFT_ALPHA

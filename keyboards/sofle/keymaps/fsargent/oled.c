@@ -58,6 +58,11 @@ static void print_status_narrow(void) {
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
+    if (keymap_config.swap_lctl_lgui) {
+        oled_write_ln_P(PSTR("SWAP"), true);
+    } else {
+        oled_write_ln_P(PSTR("SWAP"), false);
+    }
     // led_t led_usb_state = host_keyboard_led_state();
     // oled_write_ln_P(PSTR("\n\n\n\n\n\n\n//\nFelix"), led_usb_state.caps_lock);
 }
