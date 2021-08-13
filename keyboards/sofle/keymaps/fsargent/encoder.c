@@ -19,17 +19,8 @@
 
 #ifdef ENCODER_ENABLE
 
-bool     is_alt_tab_active = false;  // ADD this near the begining of keymap.c
-uint16_t alt_tab_timer     = 0;      // we will be using them soon.
-
-void matrix_scan_user(void) {  // The very important timer.
-    if (is_alt_tab_active) {
-        if (timer_elapsed(alt_tab_timer) > 500) {
-            unregister_code(KC_LGUI);
-            is_alt_tab_active = false;
-        }
-    }
-}
+bool is_alt_tab_active = false; // ADD this near the begining of keymap.c
+uint16_t alt_tab_timer = 0;
 // enum layers { BASE, CMK, WIN, GAME, SYM, NAV, WINNAV};
 
 

@@ -1,3 +1,4 @@
+
 #include QMK_KEYBOARD_H
 
 void matrix_init_kb(void) {
@@ -7,7 +8,6 @@ void matrix_init_kb(void) {
 
 void matrix_scan_kb(void) {
     matrix_scan_user();
-    asdfasdf
 }
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {

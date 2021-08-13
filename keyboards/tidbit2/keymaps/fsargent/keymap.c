@@ -33,11 +33,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 
 [_NAV] = LAYOUT(
-				KC_CUT,		KC_COPY,	KC_PASTE,\
-	TO(_BASE),	KC_HOME,	KC_UP,		KC_PGUP,\
-	KC_LGUI,	A(KC_LEFT),	A(KC_BSPC),	A(KC_RIGHT),\
-	KC_LALT,	KC_END,		KC_DOWN,	KC_PGDN,\
-	KC_LSFT,	KC_TAB,		KC_SPC,		KC_ENT
+							KC_CUT,			KC_COPY,		KC_PASTE,\
+	TO(_BASE),	KC_HOME,		KC_UP,			KC_PGUP,\
+	KC_LGUI,		A(KC_LEFT),	A(KC_BSPC),	A(KC_RIGHT),\
+	KC_LALT,		KC_END,			KC_DOWN,		KC_PGDN,\
+	KC_LSFT,		KC_TAB,			KC_SPC,			KC_ENT
 	),
 	// Function layer (numpad)
 	[_FUNC] = LAYOUT(

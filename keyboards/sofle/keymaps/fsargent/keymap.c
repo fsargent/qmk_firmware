@@ -20,7 +20,36 @@
 #include "encoder.c"
 #include "rgb.c"
 
+enum custom_keycodes {
+  ALT_TAB = SAFE_RANGE,
+};
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) { // This will do most of the grunt work with the keycodes.
+    case ALT_TAB:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        }
+        alt_tab_timer = timer_read();
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+      }
+      break;
+  }
+  return true;
+}
+
+void matrix_scan_user(void) { // The very important timer.
+  if (is_alt_tab_active) {
+    if (timer_elapsed(alt_tab_timer) > 1000) {
+      unregister_code(KC_LALT);
+      is_alt_tab_active = false;
+    }
+  }
+}
 
 enum layers { BASE, CMK, WIN, GAME, SYM, NAV, WINNAV};
 
@@ -72,12 +101,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 	[WINNAV]=LAYOUT(
 		C(KC_GRV),	MEH(2),		KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),										KC_NO,		KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_LCTL,
-		A(KC_TAB),  C(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),											KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
+		ALT_TAB,  C(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),											KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
 		C(KC_TAB),	C(KC_LEFT), KC_LEFT,	KC_DOWN,	KC_RGHT,	C(KC_RGHT),										KC_WH_L,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_WH_R,	KC_LGUI,
 		KC_LSFT,	KC_HOME,	KC_PGDN,	KC_SPC,		KC_SPC,		KC_END,		G(KC_ENT),				TG(GAME),	KC_NO,		KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_BSLS,	KC_LSFT,
 								MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),_______,_______,C(KC_BSPC),	KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LPRN,	KC_RPRN
 	)
 };
+
 
 enum combo_events {
     LPAREN,
