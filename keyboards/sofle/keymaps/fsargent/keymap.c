@@ -16,12 +16,20 @@
 	*/
 
 #include QMK_KEYBOARD_H
+
+
+bool is_alt_tab_active = false; // ADD this near the begining of keymap.c
+uint16_t alt_tab_timer = 0;
+bool is_cmd_tab_active = false; // ADD this near the begining of keymap.c
+uint16_t cmd_tab_timer = 0;
+
+
 #include "oled.c"
 #include "encoder.c"
 #include "rgb.c"
 
 enum custom_keycodes {
-  ALT_TAB = SAFE_RANGE,
+  ALT_TAB = SAFE_RANGE, CMD_TAB
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -38,15 +46,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			unregister_code(KC_TAB);
 		}
 		break;
+    case CMD_TAB:
+		if (record->event.pressed) {
+			if (!is_cmd_tab_active) {
+			is_cmd_tab_active = true;
+			register_code(KC_LGUI);
+			}
+			cmd_tab_timer = timer_read();
+			register_code(KC_TAB);
+		} else {
+			unregister_code(KC_TAB);
+		}
+		break;
 	}
   return true;
 }
 
 void matrix_scan_user(void) { // The very important timer.
   if (is_alt_tab_active) {
-	if (timer_elapsed(alt_tab_timer) > 1000) {
+	if (timer_elapsed(alt_tab_timer) > 750) {
 	  unregister_code(KC_LALT);
 	  is_alt_tab_active = false;
+	}
+  }
+  if (is_cmd_tab_active) {
+	if (timer_elapsed(cmd_tab_timer) > 750) {
+	  unregister_code(KC_LGUI);
+	  is_cmd_tab_active = false;
 	}
   }
 }
@@ -60,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,																KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
 		LT(SYM,KC_TAB),		KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,																KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_EQL,
 		MT(MOD_MEH,KC_ESC),	KC_A,	KC_S,	KC_D,	KC_F,	KC_G,																KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
-		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	MAGIC_TOGGLE_CTL_GUI,							TO(CMK),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_DEL),
+		MT(MOD_LSFT,KC_TAB),KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	MAGIC_TOGGLE_CTL_GUI,							TO(CMK),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
 		MT(MOD_LCTL,KC_LBRC),	MT(MOD_LALT,KC_RBRC), LT(SYM,KC_DEL), MO(NAV), CMD_T(KC_BSPC), 					KC_SPC,		MT(MOD_LCTL, KC_ENT), 	MT(MOD_LALT,KC_DEL),	KC_MINS,	KC_EQL
 	),
 	[CMK] = LAYOUT(
@@ -94,9 +120,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 	[NAV]=LAYOUT(
 		C(KC_GRV),	G(KC_SLSH),	KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),										KC_NO,		KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_DEL,
-		G(KC_TAB),	A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),										KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
+		CMD_TAB,	A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),										KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
 		C(KC_TAB),	A(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	A(KC_RGHT),										KC_WH_L,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_WH_R,	KC_LGUI,
-		KC_LSFT,	KC_HOME,	KC_PGDN,	G(KC_ENT),	KC_SPC,		KC_END,	    G(KC_ENT),				TO(GAME),	KC_NO,		KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_BSLS,	KC_LSFT,
+		MT(MOD_LSFT,KC_TAB),	KC_HOME,	KC_PGDN,	G(KC_ENT),	KC_SPC,		KC_END,	    G(KC_ENT),				TO(GAME),	KC_NO,		KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_BSLS,	KC_LSFT,
 					MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),	_______,	_______,A(KC_BSPC),		KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LBRC,	KC_RBRC
 	),
 	[WINNAV]=LAYOUT(
