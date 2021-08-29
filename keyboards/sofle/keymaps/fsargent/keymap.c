@@ -46,7 +46,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			unregister_code(KC_TAB);
 		}
 		break;
-    case CMD_TAB:
+	case CMD_TAB:
 		if (record->event.pressed) {
 			if (!is_cmd_tab_active) {
 			is_cmd_tab_active = true;
@@ -77,7 +77,7 @@ void matrix_scan_user(void) { // The very important timer.
   }
 }
 
-enum layers { BASE, CMK, WIN, GAME, SYM, NAV, WINNAV};
+enum layers { BASE, WIN, GAME, SYM, NAV, WINNAV};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	// Tab size 4
@@ -89,13 +89,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	MAGIC_TOGGLE_CTL_GUI,				TO(CMK),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
 		KC_LBRC,			KC_RBRC, LT(SYM,KC_DEL), MO(NAV), CMD_T(KC_BSPC), 							KC_SPC,		MT(MOD_LCTL, KC_ENT), 	MT(MOD_LALT,KC_DEL),	KC_MINS,	KC_EQL
 	),
-	[CMK] = LAYOUT(
-		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
-		LT(SYM,KC_TAB),		KC_Q,	KC_W,	KC_F,	KC_P,	KC_B,											KC_J,		KC_L,		KC_U,		KC_Y,		KC_SCLN,	KC_BSLS,
-		MT(MOD_MEH,KC_ESC),	KC_A,	KC_R,	KC_S,	KC_T,	KC_G,											KC_M,		KC_N,		KC_E,		KC_I,		KC_O,		KC_QUOT,
-		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_D,	KC_V,	_______,		            TO(WIN),	KC_K,		KC_H,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
-		_______,	_______,	_______,	_______,	_______,								 _______,	_______,	_______,	_______,	_______
-	),
+	// [CMK] = LAYOUT(
+	// 	KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
+	// 	LT(SYM,KC_TAB),		KC_Q,	KC_W,	KC_F,	KC_P,	KC_B,											KC_J,		KC_L,		KC_U,		KC_Y,		KC_SCLN,	KC_BSLS,
+	// 	MT(MOD_MEH,KC_ESC),	KC_A,	KC_R,	KC_S,	KC_T,	KC_G,											KC_M,		KC_N,		KC_E,		KC_I,		KC_O,		KC_QUOT,
+	// 	KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_D,	KC_V,	_______,					TO(WIN),	KC_K,		KC_H,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
+	// 	_______,	_______,	_______,	_______,	_______,								 _______,	_______,	_______,	_______,	_______
+	// ),
 	[WIN] = LAYOUT(
 		_______,		_______,_______,_______,_______,_______,							_______,_______,_______,_______,_______,_______,
 		_______,		_______,_______,_______,_______,_______,							_______,_______,_______,_______,_______,_______,
@@ -119,18 +119,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_NO,		KC_NO,		TT(SYM),	_______,	_______,									_______,	_______,	TG(SYM),	KC_0,		KC_DOT
 	),
 	[NAV]=LAYOUT(
-		C(KC_GRV),	G(KC_SLSH),	KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),									KC_NO,		KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_DEL,
-		CMD_TAB,	A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),									KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
-		C(KC_TAB),	A(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	A(KC_RGHT),									KC_WH_L,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_WH_R,	KC_LGUI,
-		MT(MOD_LSFT,KC_TAB),	KC_HOME,	KC_PGDN,	G(KC_ENT),	KC_SPC,		KC_END,	G(KC_ENT),	TO(GAME),	KC_NO,		KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_BSLS,	KC_LSFT,
-		MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),	_______,	_______,	A(KC_BSPC),			KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LBRC,	KC_RBRC
+		C(KC_GRV),	G(KC_SLSH),	KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),									KC_NO,		KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_LCTL,
+		CMD_TAB,	A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),									KC_WH_U,	KC_WH_L,	KC_MS_U,	KC_WH_R,	KC_END,		KC_LALT,
+		C(KC_TAB),	A(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	A(KC_RGHT),									KC_BTN3,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_NO,		KC_LGUI,
+		MT(MOD_LSFT,KC_TAB),	KC_HOME,	KC_PGDN,	G(KC_ENT),	KC_SPC,		KC_END,	G(KC_ENT),	TO(GAME),	KC_WH_D,	KC_NO,		KC_LCBR,	KC_RCBR,	KC_BSLS,	KC_DEL,
+		MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),	_______,	_______,	A(KC_BSPC),			KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LBRC,	KC_RBRC,
 	),
 	[WINNAV]=LAYOUT(
 		C(KC_GRV),	MEH(2),		KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),									KC_NO,		KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MUTE,	KC_LCTL,
-		ALT_TAB, 	C(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),									KC_NO,		KC_BTN5,	KC_MS_U,	KC_BTN4,	KC_END,		KC_LALT,
-		KC_LGUI,	C(KC_LEFT), KC_LEFT,	KC_DOWN,	KC_RGHT,	C(KC_RGHT),								 	KC_WH_L,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_WH_R,	KC_LGUI,
-		KC_LSFT,	KC_HOME,	KC_PGDN,	KC_SPC,		KC_SPC,		KC_END,		G(KC_ENT),			TG(GAME),	KC_NO,		KC_WH_L,	KC_WH_D,	KC_WH_U,	KC_WH_R,	KC_LSFT,
-		MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),_______,_______,C(KC_BSPC),						KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LPRN,	KC_RPRN
+		ALT_TAB, 	C(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),									KC_WH_U,	KC_WH_L,	KC_MS_U,	KC_WH_R,	KC_END,		KC_LALT,
+		KC_LGUI,	C(KC_LEFT), KC_LEFT,	KC_DOWN,	KC_RGHT,	C(KC_RGHT),								 	KC_BTN3,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_NO,		KC_LGUI,
+		KC_LSFT,	KC_HOME,	KC_PGDN,	KC_SPC,		KC_SPC,		KC_END,		G(KC_ENT),			TG(GAME),	KC_WH_D,	KC_NO,		KC_LCBR,	KC_RCBR,	KC_BSLS,	KC_DEL,
+		MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),	_______,_______,C(KC_BSPC),					KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LBRC,	KC_RBRC,
 	)
 };
 
@@ -139,7 +139,7 @@ enum combo_events {
 	BKT,
 	CBRC,
 	PAREN,
-    LTGT,
+	LTGT,
 	CMD_BSPC,
 	CMD_ENTER,
 	CTRLC,
@@ -150,7 +150,7 @@ enum combo_events {
 	EML,
 	PHONE,
 	EMA,
-    WINDELWD,
+	WINDELWD,
 	COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH; // remove the COMBO_COUNT define and use this instead!
@@ -182,7 +182,7 @@ combo_t key_combos[] = {
 	[BKT] = COMBO_ACTION(zx_combo),
 	[PAREN] = COMBO_ACTION(xc_combo),
 	[CBRC] = COMBO_ACTION(cv_combo),
-    [LTGT] = COMBO_ACTION(vb_combo),
+	[LTGT] = COMBO_ACTION(vb_combo),
 	[CTRLC] = COMBO_ACTION(zxcv_combo),
 	[CMD_BSPC] = COMBO_ACTION(jklsemi_combo),
 	[CMD_ENTER] = COMBO_ACTION(asdf_combo),
@@ -193,7 +193,7 @@ combo_t key_combos[] = {
 	[PHONE]= COMBO_ACTION(phone_combo),
 	[EMA] = COMBO_ACTION(ema_combo),
 	[DELWD] = COMBO_ACTION(df_combo),
-    [WINDELWD] = COMBO_ACTION(fg_combo)
+	[WINDELWD] = COMBO_ACTION(fg_combo)
 
 };
 /* COMBO_ACTION(x) is same as COMBO(x, KC_NO) */
@@ -206,7 +206,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 				tap_code16(A(KC_BSPC));
 			}
 			break;
-        case WINDELWD:
+		case WINDELWD:
 			if (pressed) {
 				tap_code16(C(KC_BSPC));
 			}
@@ -217,9 +217,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 				tap_code16(KC_LEFT);
 			}
 			break;
-        case CBRC:
+		case CBRC:
 			if (pressed) {
-			    SEND_STRING("{}");
+				SEND_STRING("{}");
 				tap_code16(KC_LEFT);
 			}
 			break;
