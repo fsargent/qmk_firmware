@@ -25,29 +25,29 @@ enum custom_keycodes {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) { // This will do most of the grunt work with the keycodes.
-    case ALT_TAB:
-      if (record->event.pressed) {
-        if (!is_alt_tab_active) {
-          is_alt_tab_active = true;
-          register_code(KC_LALT);
-        }
-        alt_tab_timer = timer_read();
-        register_code(KC_TAB);
-      } else {
-        unregister_code(KC_TAB);
-      }
-      break;
-  }
+	switch (keycode) { // This will do most of the grunt work with the keycodes.
+	case ALT_TAB:
+		if (record->event.pressed) {
+			if (!is_alt_tab_active) {
+			is_alt_tab_active = true;
+			register_code(KC_LALT);
+			}
+			alt_tab_timer = timer_read();
+			register_code(KC_TAB);
+		} else {
+			unregister_code(KC_TAB);
+		}
+		break;
+	}
   return true;
 }
 
 void matrix_scan_user(void) { // The very important timer.
   if (is_alt_tab_active) {
-    if (timer_elapsed(alt_tab_timer) > 1000) {
-      unregister_code(KC_LALT);
-      is_alt_tab_active = false;
-    }
+	if (timer_elapsed(alt_tab_timer) > 1000) {
+	  unregister_code(KC_LALT);
+	  is_alt_tab_active = false;
+	}
   }
 }
 
@@ -57,11 +57,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	// Tab size 4
 
 	[BASE] = LAYOUT(
-		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,																KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		A(KC_BSPC),
-		LT(SYM,KC_TAB),		KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,																KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		MT(MOD_LCMD,KC_BSLS),
-		MT(MOD_MEH,KC_ESC),	KC_A,	KC_S,	KC_D,	KC_F,	KC_G,																KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	MT(MOD_LALT,KC_QUOT),
+		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,																KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
+		LT(SYM,KC_TAB),		KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,																KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_EQL,
+		MT(MOD_MEH,KC_ESC),	KC_A,	KC_S,	KC_D,	KC_F,	KC_G,																KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
 		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	MAGIC_TOGGLE_CTL_GUI,							TO(CMK),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_DEL),
-		MT(MOD_LCTL,KC_LBRC),   MT(MOD_LALT,KC_RBRC),  LT(SYM,KC_DEL), MO(NAV), CMD_T(KC_BSPC), 					KC_SPC,		LT(NAV, KC_ENT),		LT(SYM,KC_DEL),	KC_MINS,	KC_EQL
+		MT(MOD_LCTL,KC_LBRC),	MT(MOD_LALT,KC_RBRC), LT(SYM,KC_DEL), MO(NAV), CMD_T(KC_BSPC), 					KC_SPC,		MT(MOD_LCTL, KC_ENT), 	MT(MOD_LALT,KC_DEL),	KC_MINS,	KC_EQL
 	),
 	[CMK] = LAYOUT(
 		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,					        									KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
@@ -71,9 +71,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,	_______,	_______,	_______,	_______,	                                                _______,	_______,	_______,	_______,	_______
 	),
 	[WIN] = LAYOUT(
-		KC_GRV,				KC_1,	KC_2,		KC_3,		KC_4,		KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		C(KC_BSPC),
-		KC_TAB,				KC_Q,	KC_W,		KC_E,		KC_R,		KC_T,											KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		MT(MOD_LCTL,KC_BSLS),
-		LT(NAV,KC_ESC),	    KC_A,	KC_S,		KC_D,		KC_F,		KC_G,											KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	MT(MOD_LALT,KC_QUOT),
+		KC_GRV,				KC_1,	KC_2,		KC_3,		KC_4,		KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
+		KC_TAB,				KC_Q,	KC_W,		KC_E,		KC_R,		KC_T,											KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_EQL,
+		LT(NAV,KC_ESC),	    KC_A,	KC_S,		KC_D,		KC_F,		KC_G,											KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
 		KC_LSFT,			KC_Z,	KC_X,		KC_C,		KC_V,		KC_B,	_______,				    TO(GAME),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_DEL),
 			MT(MOD_LGUI,KC_LBRC),	_______,	_______,	MO(WINNAV),	CTL_T(KC_BSPC),				_______,	LT(WINNAV, KC_ENT),	_______,	_______,	_______
 	),
@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,			KC_Q,	KC_W,		KC_E,		KC_R,		KC_T,											KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSLS,
 		KC_ESC,			KC_A,	KC_S,		KC_D,		KC_F,		KC_G,											KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
 		KC_LSFT,		KC_Z,	KC_X,		KC_C,		KC_V,		KC_B,	_______,					TO(BASE),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	KC_LSFT,
-			KC_LGUI,	KC_LALT,	MO(NAV),	KC_LCTL,	KC_SPC,										KC_ENT,		KC_SPC,		LT(SYM,KC_DEL),	KC_MINS,	KC_EQL
+			KC_LGUI,	KC_LALT,	MO(NAV),	KC_LCTL,	KC_SPC,								    	KC_SPC,	    MT(MOD_LCTL, KC_ENT), 	MT(MOD_LALT,KC_DEL),	KC_MINS,	KC_EQL
 	),
 	[SYM]	=	LAYOUT(
 		// C(G(KC_SPC)) is the OS X Emoji Editor
@@ -110,19 +110,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 enum combo_events {
-    LPAREN,
-    RPAREN,
-    PAREN,
-    CMD_BSPC,
-    CMD_ENTER,
-    CTRLC,
-    CTRLR,
-    CAL,
-    APW,
-    DELWD,
-    EML,
-    PHONE,
-    EMA,
+	LPAREN,
+	RPAREN,
+	PAREN,
+	CMD_BSPC,
+	CMD_ENTER,
+	CTRLC,
+	CTRLR,
+	CAL,
+	APW,
+	DELWD,
+	EML,
+	PHONE,
+	EMA,
 	COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH; // remove the COMBO_COUNT define and use this instead!
@@ -157,10 +157,10 @@ combo_t key_combos[] = {
 	[CMD_ENTER] = COMBO_ACTION(asdf_combo),
 	[CTRLR] = COMBO_ACTION(qr_combo),
 	[CAL] = COMBO_ACTION(cal_combo),
-    [APW] = COMBO_ACTION(uiop_combo),
-    [EML]= COMBO_ACTION(eml_combo),
-    [PHONE]= COMBO_ACTION(phone_combo),
-    [EMA] = COMBO_ACTION(ema_combo),
+	[APW] = COMBO_ACTION(uiop_combo),
+	[EML]= COMBO_ACTION(eml_combo),
+	[PHONE]= COMBO_ACTION(phone_combo),
+	[EMA] = COMBO_ACTION(ema_combo),
 	[DELWD] = COMBO_ACTION(df_combo)
 };
 /* COMBO_ACTION(x) is same as COMBO(x, KC_NO) */
@@ -206,22 +206,22 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 				SEND_STRING("https://felixsargent.com/calendar");
 				}
 			break;
-        case EML:
+		case EML:
 			if (pressed) {
 				SEND_STRING("felix.sargent@gmail.com");
 				}
 			break;
-        case EMA:
+		case EMA:
 			if (pressed) {
 				SEND_STRING("fsargent@atlassian.com");
 				}
 			break;
-        case PHONE:
+		case PHONE:
 			if (pressed) {
 				SEND_STRING("4158606970");
 				}
 			break;
-        case APW:
+		case APW:
 			if (pressed) {
 				SEND_STRING("XXX");
 				}
