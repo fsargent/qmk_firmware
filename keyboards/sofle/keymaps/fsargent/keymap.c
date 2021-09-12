@@ -26,7 +26,7 @@ uint16_t cmd_tab_timer = 0;
 
 #include "oled.c"
 #include "encoder.c"
-#include "rgb.c"
+// #include "rgb.c"
 
 enum custom_keycodes {
   ALT_TAB = SAFE_RANGE, CMD_TAB
@@ -85,9 +85,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[BASE] = LAYOUT(
 		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,													KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
 		KC_TAB,				KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,													KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_EQL,
-		MT(MOD_MEH,KC_ESC),	KC_A,	KC_S,	KC_D,	KC_F,	KC_G,													KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
-		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	MAGIC_TOGGLE_CTL_GUI,				TO(WIN),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
-		KC_LBRC,			KC_RBRC,LT(SYM,KC_DEL), MO(NAV), CMD_T(KC_BSPC), 							KC_SPC,		MT(MOD_LCTL, KC_ENT), 	MT(MOD_LALT,KC_BSPC),	KC_MINS,	KC_EQL
+		LT(SYM,KC_ESC),	    KC_A,	KC_S,	KC_D,	KC_F,	KC_G,													KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
+		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	MAGIC_TOGGLE_CTL_GUI,	TO(WIN),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
+		KC_LBRC,			KC_RBRC,MT(MOD_MEH,KC_DEL), MO(NAV), CMD_T(KC_BSPC), 							KC_SPC,		MT(MOD_LCTL, KC_ENT), 	MT(MOD_LALT,KC_TAB),	KC_MINS,	KC_EQL
 	),
 	// [CMK] = LAYOUT(
 	// 	KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
@@ -99,9 +99,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[WIN] = LAYOUT(
 		_______,			_______,_______,_______,_______,_______,							_______,_______,_______,_______,_______,_______,
 		_______,			_______,_______,_______,_______,_______,							_______,_______,_______,_______,_______,_______,
-		LT(NAV,KC_ESC),		_______,_______,_______,_______,_______,							_______,_______,_______,_______,_______,_______,
-		_______,			_______,_______,_______,_______,_______,_______,		TO(GAME),	_______,_______,_______,_______,_______,_______,
-		_______,			_______,_______,MO(WINNAV),	CTL_T(KC_BSPC),				_______,	MT(MOD_LGUI, KC_ENT),	_______,_______,_______
+		_______,			_______,_______,_______,_______,_______,							_______,_______,_______,_______,_______,_______,
+		_______,			_______,_______,_______,_______,_______,KC_LGUI,		TO(GAME),	_______,_______,_______,_______,_______,_______,
+		_______,			_______,_______,MO(WINNAV),	CTL_T(KC_BSPC),				_______,	MT(MOD_LALT, KC_ENT),	MT(MOD_LGUI,KC_TAB),_______,_______
 	),
 	[GAME] = LAYOUT(
 		KC_GRV,				_______,_______,_______,_______,_______,								_______,_______,_______,_______,_______,KC_BSPC,
@@ -113,15 +113,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[SYM]	=	LAYOUT(
 		// C(G(KC_SPC)) is the OS X Emoji Editor
 		C(G(KC_SPC)),	KC_F1,		KC_F2,		KC_F3,		KC_F4,		KC_F5,										KC_F6,		KC_F7,		KC_F8,		KC_F9,		KC_F10,		KC_F11,
-		_______,		KC_NO,		KC_LPRN, 	KC_RPRN, 	KC_MINS,	KC_EQL,										KC_MINS,	KC_P7,		KC_P8,		KC_P9,		KC_NO,		KC_F12,
-		_______,		KC_NO,		KC_LBRC, 	KC_RBRC,	KC_UNDS,	KC_PLUS,									KC_PLUS,	KC_P4,		KC_P5,		KC_P6,		KC_0,		KC_PSCR,
-		_______,		KC_NO,		KC_LCBR, 	KC_RCBR,	KC_NO,		KC_NO,	C(G(KC_SPC)),			TG(SYM),	KC_ASTR,	KC_P1,		KC_P2,		KC_P3,		KC_BSLS,	KC_NLCK,
+		_______,		KC_GRV,		KC_NO,		KC_NO,		KC_NO,		KC_NO,										KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_F12,
+		_______,		KC_1,		KC_2,		KC_3,		KC_4,		KC_5,										KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_PSCR,
+		_______,		KC_NO,		KC_LCBR, 	KC_RCBR,	KC_NO,		KC_NO,	C(G(KC_SPC)),			TG(SYM),	KC_MINS,	KC_EQL,		KC_LBRC,	KC_RBRC,	KC_BSLS,	KC_NLCK,
 						KC_LABK, 	KC_RABK,	TT(SYM),	_______,	_______,						_______,	_______,	TG(SYM),	KC_0,		KC_DOT
 ),
 	[NAV]=LAYOUT(
-		C(KC_GRV),				G(KC_SLSH),	KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),									KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MINS,	KC_EQL,		KC_LCTL,
-		CMD_TAB,				A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),									KC_WH_U,	KC_WH_L,	KC_MS_U,	KC_WH_R,	KC_END,		KC_LALT,
-		C(KC_TAB),				A(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	A(KC_RGHT),									KC_BTN3,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_NO,		KC_LGUI,
+		C(KC_GRV),				G(KC_SLSH),	KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),							KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MINS,	KC_EQL,		KC_LCTL,
+		CMD_TAB,				A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),							KC_WH_U,	KC_WH_L,	KC_MS_U,	KC_WH_R,	KC_END,		KC_LALT,
+		C(KC_TAB),				A(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	A(KC_RGHT),							KC_BTN3,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_SCLN,	KC_LGUI,
 		MT(MOD_LSFT,KC_TAB),	KC_HOME,	KC_PGDN,	G(KC_ENT),	KC_SPC,		KC_END,	G(KC_ENT),		TO(GAME),	KC_WH_D,	KC_NO,		KC_LCBR,	KC_RCBR,	KC_BSLS,	KC_DEL,
 		MT(MOD_LCTL,KC_COMM),	MT(MOD_LALT,KC_DOT),	_______,	_______,	A(KC_BSPC),				KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LBRC,	KC_RBRC
 	),
@@ -140,7 +140,7 @@ enum combo_events {
 	CBRC,
 	PAREN,
 	LTGT,
-	CMD_BSPC,
+	CTRLALTDEL,
 	CMD_ENTER,
 	CTRLC,
 	CTRLR,
@@ -177,24 +177,28 @@ const uint16_t PROGMEM eml_combo[] = {KC_E, KC_M, KC_L, COMBO_END};
 const uint16_t PROGMEM ema_combo[] = {KC_E, KC_A, KC_M, COMBO_END};
 
 
-
 combo_t key_combos[] = {
+
+	// 2 key combos
 	[BKT] = COMBO_ACTION(zx_combo),
 	[PAREN] = COMBO_ACTION(xc_combo),
 	[CBRC] = COMBO_ACTION(cv_combo),
 	[LTGT] = COMBO_ACTION(vb_combo),
-	[CTRLC] = COMBO_ACTION(zxcv_combo),
-	[CMD_BSPC] = COMBO_ACTION(jklsemi_combo),
-	[CMD_ENTER] = COMBO_ACTION(asdf_combo),
 	[CTRLR] = COMBO_ACTION(qr_combo),
-	[CAL] = COMBO_ACTION(cal_combo),
+	[DELWD] = COMBO_ACTION(df_combo),
+	[WINDELWD] = COMBO_ACTION(fg_combo),
+
+	// 4 key combos
+	[CTRLC] = COMBO_ACTION(zxcv_combo),
+	[CTRLALTDEL] = COMBO_ACTION(jklsemi_combo),
+	[CMD_ENTER] = COMBO_ACTION(asdf_combo),
 	[APW] = COMBO_ACTION(uiop_combo),
+
+	// Misc
+	[CAL] = COMBO_ACTION(cal_combo),
 	[EML]= COMBO_ACTION(eml_combo),
 	[PHONE]= COMBO_ACTION(phone_combo),
-	[EMA] = COMBO_ACTION(ema_combo),
-	[DELWD] = COMBO_ACTION(df_combo),
-	[WINDELWD] = COMBO_ACTION(fg_combo)
-
+	[EMA] = COMBO_ACTION(ema_combo)
 };
 /* COMBO_ACTION(x) is same as COMBO(x, KC_NO) */
 
@@ -270,9 +274,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 				SEND_STRING("XXX");
 				}
 			break;
-		case CMD_BSPC:
+		case CTRLALTDEL:
 			if (pressed) {
-			 tap_code16(G(KC_BSPC));
+			 tap_code16(C(A(KC_DEL)));
 						}
 			break;
 		case CMD_ENTER:
@@ -294,11 +298,10 @@ uint32_t layer_state_set_user(uint32_t state) {
 			autoshift_enable();
 			break;
 	}
-// 		// rgblight_set_layer_state(2, layer_state_cmp(state, 2));
-// 		// rgblight_set_layer_state(3, layer_state_cmp(state, 1));
-// 		// rgblight_set_layer_state(4, layer_state_cmp(state, 5));
-// 		// rgblight_set_layer_state(5, layer_state_cmp(state, 4));
-// 		// rgblight_set_layer_state(6, layer_state_cmp(state, 3));
+    // rgblight_set_layer_state(2, layer_state_cmp(state, 2));
+    // rgblight_set_layer_state(3, layer_state_cmp(state, 1));
+    // rgblight_set_layer_state(4, layer_state_cmp(state, 5));
+    // rgblight_set_layer_state(5, layer_state_cmp(state, 4));
 
 	return state;
 }
