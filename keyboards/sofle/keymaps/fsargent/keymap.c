@@ -86,8 +86,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,												KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
 		KC_TAB,				KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,												KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_LBRC,
 		MT(MOD_MEH,KC_ESC),	KC_A,	KC_S,	KC_D,	KC_F,	KC_G,												KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
-		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	MAGIC_TOGGLE_CTL_GUI,			TO(WIN),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
-		MT(MOD_LCTL, KC_LBRC),	MT(MOD_LALT, KC_RBRC),	LT(SYM,KC_DEL), MO(NAV),	CMD_T(KC_BSPC),	KC_SPC,		LT(NAV, KC_ENT),	MT(MOD_LGUI, KC_DEL),	MT(MOD_LALT, KC_MINS), 	MT(MOD_LCTL, KC_EQL)
+		KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	C(G(KC_SPC)),			TO(WIN),	KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	MT(MOD_LSFT,KC_BSLS),
+		MT(MOD_LCTL, KC_LBRC),	MT(MOD_LALT, KC_RBRC),	LT(SYM,KC_DEL), MO(NAV),	CMD_T(KC_BSPC),	KC_SPC,		KC_ENT,	MT(MOD_LSFT, KC_DEL),	MT(MOD_LALT, KC_MINS), 	MT(MOD_LCTL, KC_EQL)
 	),
 	// [CMK] = LAYOUT(
 	// 	KC_GRV,				KC_1,	KC_2,	KC_3,	KC_4,	KC_5,											KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_MINS,
@@ -135,6 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
+#ifdef COMBO_ENABLE
+
+
 enum combo_events {
 	BKT,
 	CBRC,
@@ -142,6 +145,9 @@ enum combo_events {
 	LTGT,
 	CTRLALTDEL,
 	CMD_ENTER,
+  ENTER,
+  TAB,
+  SHIFT_TAB,
 	CTRLC,
 	CTRLR,
 	CAL,
@@ -149,7 +155,7 @@ enum combo_events {
 	DELWD,
 	EML,
 	PHONE,
-	EMA,
+	EMW,
 	WINDELWD,
 	COMBO_LENGTH
 };
@@ -171,6 +177,9 @@ const uint16_t PROGMEM qr_combo[] = {KC_Q, KC_R, COMBO_END};
 const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM fg_combo[] = {KC_F, KC_G, COMBO_END};
 
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+
+
 const uint16_t PROGMEM cal_combo[] = {KC_C, KC_A, KC_L, COMBO_END};
 const uint16_t PROGMEM phone_combo[] = {KC_P, KC_Q,COMBO_END};
 const uint16_t PROGMEM eml_combo[] = {KC_E, KC_M, KC_L, COMBO_END};
@@ -180,13 +189,16 @@ const uint16_t PROGMEM ema_combo[] = {KC_E, KC_A, KC_M, COMBO_END};
 combo_t key_combos[] = {
 
 	// 2 key combos
-	[BKT] = COMBO_ACTION(zx_combo),
-	[PAREN] = COMBO_ACTION(xc_combo),
-	[CBRC] = COMBO_ACTION(cv_combo),
+	[TAB] = COMBO_ACTION(cv_combo),
+	[SHIFT_TAB] = COMBO_ACTION(xc_combo),
+	// [CBRC] = COMBO_ACTION(cv_combo),
 	[LTGT] = COMBO_ACTION(vb_combo),
 	[CTRLR] = COMBO_ACTION(qr_combo),
 	[DELWD] = COMBO_ACTION(df_combo),
 	[WINDELWD] = COMBO_ACTION(fg_combo),
+
+  [ENTER] = COMBO_ACTION(jk_combo),
+
 
 	// 4 key combos
 	[CTRLC] = COMBO_ACTION(zxcv_combo),
@@ -198,13 +210,18 @@ combo_t key_combos[] = {
 	[CAL] = COMBO_ACTION(cal_combo),
 	[EML]= COMBO_ACTION(eml_combo),
 	[PHONE]= COMBO_ACTION(phone_combo),
-	[EMA] = COMBO_ACTION(ema_combo)
+	[EMW] = COMBO_ACTION(ema_combo)
 };
 /* COMBO_ACTION(x) is same as COMBO(x, KC_NO) */
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
 	switch(combo_index) {
 
+		case ENTER:
+			if (pressed) {
+				tap_code16(KC_ENTER);
+			}
+			break;
 		case DELWD:
 			if (pressed) {
 				tap_code16(A(KC_BSPC));
@@ -215,10 +232,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 				tap_code16(C(KC_BSPC));
 			}
 			break;
-		case BKT:
+		case TAB:
 			if (pressed) {
-				SEND_STRING("[]");
-				tap_code16(KC_LEFT);
+				tap_code16(KC_TAB);
 			}
 			break;
 		case CBRC:
@@ -227,10 +243,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 				tap_code16(KC_LEFT);
 			}
 			break;
-		case PAREN:
+		case SHIFT_TAB:
 			if (pressed) {
-				SEND_STRING("()");
-				 tap_code16(KC_LEFT);
+				 tap_code16(S(KC_TAB));
 			}
 			break;
 		case LTGT:
@@ -259,9 +274,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 				SEND_STRING("felix.sargent@gmail.com");
 				}
 			break;
-		case EMA:
+		case EMW:
 			if (pressed) {
-				SEND_STRING("fsargent@atlassian.com");
+				SEND_STRING("felix@truework.com");
 				}
 			break;
 		case PHONE:
@@ -287,21 +302,4 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 	}
 }
 
-
-
-uint32_t layer_state_set_user(uint32_t state) {
-	switch (biton32(state)) {
-		case GAME:
-			autoshift_disable();
-		break;
-		default:
-			autoshift_enable();
-			break;
-	}
-    // rgblight_set_layer_state(2, layer_state_cmp(state, 2));
-    // rgblight_set_layer_state(3, layer_state_cmp(state, 1));
-    // rgblight_set_layer_state(4, layer_state_cmp(state, 5));
-    // rgblight_set_layer_state(5, layer_state_cmp(state, 4));
-
-	return state;
-}
+#endif  // COMBO_ENABLE
