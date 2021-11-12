@@ -4,10 +4,11 @@
 // #include "../common/bitc_led.h"
 
 #define _BASE	0
-#define _FN		1
-#define _FN2	2
-#define _NAV	3
-#define _FUNC	4
+#define _MUSIC	1
+#define _FN		2
+#define _FN2	3
+#define _NAV	4
+#define _FUNC	5
 
 
 enum custom_keycodes {
@@ -19,10 +20,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	// Base layer (numpad)
 	[_BASE] = LAYOUT(
 				KC_KP_SLASH,	KC_KP_ASTERISK,	KC_KP_MINUS, \
-	TO(_FN),		KC_KP_7,		KC_KP_8,		KC_KP_9,\
+	TO(_MUSIC),		KC_KP_7,		KC_KP_8,		KC_KP_9,\
 	KC_ESC,		KC_KP_4,		KC_KP_5,		KC_KP_6,\
 	KC_KP_ENTER,	KC_KP_1,		KC_KP_2,		KC_KP_3,\
 	KC_KP_ENTER,	KC_KP_PLUS,		KC_KP_0,		KC_KP_DOT\
+	),
+	[_MUSIC] = LAYOUT(
+				KC_F22,	KC_F23,	KC_F24, \
+	TO(_FN),		KC_F19,	KC_F20,	KC_F21,\
+	KC_ESC,		KC_MPRV,	KC_MPLY,	KC_MNXT,\
+	KC_KP_ENTER,	KC_F13,	KC_F14,	KC_F15,\
+	KC_MPLY,	KC_LALT,	KC_LCTL,	KC_LGUI\
 	),
 	[_FN] = LAYOUT(
 				KC_F10,	KC_F11,	KC_F12, \
@@ -56,6 +64,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
+// ENCODERS
+bool encoder_update_user(uint8_t index, bool clockwise) {
+	/* With an if statement we can check which encoder was turned. */
+	switch (get_highest_layer(layer_state)) {
+	case 1:
+		if (index == 0) {
+			if (clockwise) {
+				tap_code(KC_VOLU);
+			} else {
+				tap_code(KC_VOLD);
+			}
+		}
+		else { /* Second encoder */
+			if (clockwise) {
+				tap_code16(KC_MNXT);
+			} else {
+				tap_code16(KC_MPRV);
+			}
+		}
+		break;
+	default:
+		if (index == 0) { /* First encoder */
+			if (clockwise) {
+				tap_code(KC_UP);
+			} else {
+				tap_code(KC_DOWN);
+			}
+		} else { /* Second encoder */
+			if (clockwise) {
+				tap_code16(KC_RIGHT);
+			} else {
+				tap_code16(KC_LEFT);
+			}
+		}
+	}
+	return true;
+// ENCODERS END
+};
+
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
 
@@ -68,30 +115,40 @@ static void print_status_narrow(void) {
 	switch (get_highest_layer(layer_state)) {
 		case 0:
 			oled_write_ln_P(PSTR("Num"), false);
-			oled_write_ln_P(PSTR("/|*|-"), false);
-			oled_write_ln_P(PSTR("7|8|9"), false);
-			oled_write_ln_P(PSTR("4|5|6"), false);
-			oled_write_ln_P(PSTR("1|2|3"), false);
-			oled_write_ln_P(PSTR("A|C|G"), false);
+			oled_write_P(PSTR("/|*|-"), false);
+			oled_write_P(PSTR("7|8|9"), false);
+			oled_write_P(PSTR("4|5|6"), false);
+			oled_write_P(PSTR("1|2|3"), false);
+			oled_write_P(PSTR("A|C|G\n"), false);
 
 			oled_write_ln_P(PSTR("ESC"), false);
-			oled_write_ln_P(PSTR("ENTER"), false);
+			oled_write_P(PSTR("ENTER"), false);
 
 			break;
 		case 1:
+			oled_write_ln_P(PSTR("Mus"), true);
+			oled_write_ln_P(PSTR(" | | "), false);
+			oled_write_ln_P(PSTR(" | | "), false);
+			oled_write_ln_P(PSTR("<|P|>"), false);
+			oled_write_ln_P(PSTR(" | | "), false);
+			oled_write_ln_P(PSTR(" | | "), false);
+			oled_write_ln_P(PSTR(""), false);
+			oled_write_ln_P(PSTR(""), false);
+			break;
+		case 2:
 			oled_write_ln_P(PSTR("Fn"), true);
-			oled_write_ln_P(PSTR("10-12"), false);
-			oled_write_ln_P(PSTR("7|8|9"), false);
-			oled_write_ln_P(PSTR("4|5|6"), false);
-			oled_write_ln_P(PSTR("1|2|3"), false);
-			oled_write_ln_P(PSTR("A|C|G"), false);
+			oled_write_P(PSTR("10-12"), false);
+			oled_write_P(PSTR("7|8|9"), false);
+			oled_write_P(PSTR("4|5|6"), false);
+			oled_write_P(PSTR("1|2|3"), false);
+			oled_write_P(PSTR("A|C|G"), false);
 
 
 			oled_write_ln_P(PSTR("ESC"), false);
-			oled_write_ln_P(PSTR("ENTER"), false);
+			oled_write_P(PSTR("ENTER"), false);
 
 			break;
-		case 2:
+		case 3:
 			oled_write_ln_P(PSTR("Fn2"), true);
 			oled_write_ln_P(PSTR("22-24"), false);
 			oled_write_ln_P(PSTR("19-21"), false);
@@ -103,11 +160,11 @@ static void print_status_narrow(void) {
 			oled_write_ln_P(PSTR("ENTER"), false);
 
 			break;
-		case 3:
+		case 4:
 			oled_write_ln_P(PSTR("Nav\n"), true);
-			oled_write_ln_P(PSTR("H^u"), false);
-			oled_write_ln_P(PSTR("LxR"), false);
-			oled_write_ln_P(PSTR("EvV"), false);
+			oled_write_ln_P(PSTR("H|^|u"), false);
+			oled_write_ln_P(PSTR("L|x|R"), false);
+			oled_write_ln_P(PSTR("E|v|V"), false);
 			oled_write_ln_P(PSTR("->_E"), false);
 			oled_write_ln_P(PSTR(""), false);
 			oled_write_ln_P(PSTR(""), false);
@@ -117,7 +174,7 @@ static void print_status_narrow(void) {
 			oled_write_ln_P(PSTR(""), false);
 
 			break;
-		 case 4:
+		 case 5:
 			oled_write_ln_P(PSTR("RGB\n"), true);
 			oled_write_P(PSTR("*Togg"), false);
 			oled_write_P(PSTR("8Mode"), false);
@@ -182,24 +239,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // 	return state;
 // }
 
-// ENCODERS
-bool encoder_update_user(uint8_t index, bool clockwise) {
-	/* With an if statement we can check which encoder was turned. */
-	if (index == 0) { /* First encoder */
-		if (clockwise) {
-			tap_code(KC_UP);
-		} else {
-			tap_code(KC_DOWN);
-		}
-	} else if (index == 1) { /* Second encoder */
-		if (clockwise) {
-			tap_code16(KC_RIGHT);
-		} else {
-			tap_code16(KC_LEFT);
-		}
-	}
-	return true;
-}
+
+
 
 void led_set_kb(uint8_t usb_led) {
 	if (usb_led & (1<<USB_LED_NUM_LOCK))
