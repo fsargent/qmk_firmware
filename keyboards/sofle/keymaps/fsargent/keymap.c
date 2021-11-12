@@ -29,11 +29,22 @@ uint16_t cmd_tab_timer = 0;
 // #include "rgb.c"
 
 enum custom_keycodes {
-  ALT_TAB = SAFE_RANGE, CMD_TAB
+  ALT_TAB = SAFE_RANGE, CMD_TAB, SELWORD
+
 };
+
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	switch (keycode) { // This will do most of the grunt work with the keycodes.
+
+  case SELWORD:  // Selects the current word under the cursor.
+    if (record->event.pressed) {
+      // SEND_STRING(SS_LCTL(SS_TAP(X_RGHT) SS_LSFT(SS_TAP(ffdfd))));
+      // Mac users, change LCTL to LALT:
+      SEND_STRING(SS_LALT(SS_TAP(X_RGHT) SS_LSFT(SS_TAP(X_LEFT))));
+    }
+    break;
 	case ALT_TAB:
 		if (record->event.pressed) {
 			if (!is_alt_tab_active) {
@@ -120,9 +131,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 	[NAV]=LAYOUT(
 		C(KC_GRV),				G(KC_SLSH),	KC_NO,		KC_WH_U,	KC_WH_R,	G(KC_ENT),							KC_MPRV,	KC_MPLY,	KC_MNXT,	KC_MINS,	KC_EQL,		KC_EQL,
-		CMD_TAB,				A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),							KC_WH_U,	KC_WH_L,	KC_MS_U,	KC_WH_R,	KC_END,		KC_RBRC,
+		CMD_TAB,				A(KC_BSPC),	KC_PGUP,	KC_UP,		KC_ENT,		A(KC_DEL),							KC_WH_L,	KC_WH_U,	KC_MS_U,	KC_WH_R,	KC_WH_R,		KC_RBRC,
 		C(KC_TAB),				A(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	A(KC_RGHT),							KC_BTN3,	KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_SCLN,	KC_LGUI,
-		MT(MOD_LSFT,KC_TAB),	KC_HOME,	KC_PGDN,	G(KC_ENT),	KC_SPC,		KC_END,	G(KC_ENT),		TO(GAME),	KC_WH_D,	KC_NO,		KC_LCBR,	KC_RCBR,	KC_BSLS,	KC_DEL,
+		MT(MOD_LSFT,KC_TAB),	KC_HOME,	G(KC_LEFT),	SELWORD,	G(KC_RGHT),		KC_END,	G(KC_ENT),		TO(GAME),	KC_WH_D,	KC_WH_D,	KC_LCBR,	KC_RCBR,	KC_BSLS,	KC_DEL,
 		_______,	_______,	_______,	_______,	_______,										KC_BTN1,	KC_BTN2,	KC_BTN3,	KC_LBRC,	KC_RBRC
 	),
 	[WINNAV]=LAYOUT(
