@@ -77,7 +77,7 @@
 #define RGBLED_SPLIT \
     { 37, 37 }
 
-#define RGBLIGHT_LIMIT_VAL 160  // Power draw may exceed 0.6A at max brightness with white colour.
+#define RGBLIGHT_LIMIT_VAL 100  // Power draw may exceed 0.6A at max brightness with white colour.
 #define RGBLIGHT_LAYERS
 #define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
 #define RGBLIGHT_SLEEP
@@ -95,7 +95,7 @@
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 // #   define RGB_MATRIX_LED_PROCESS_LIMIT (DRIVER_LED_TOTAL + 4) / 5 // limits the number of LEDs to process in an animation per task run (increases keyboard responsiveness)
 // #   define RGB_MATRIX_LED_FLUSH_LIMIT 16 // limits in milliseconds how frequently an animation will update the LEDs. 16 (16ms) is equivalent to limiting to 60fps (increases keyboard responsiveness)
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150  // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash.
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 100  // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash.
 
 #define RGB_MATRIX_STARTUP_MODE       RGB_MATRIX_GRADIENT_LEFT_RIGHT
 

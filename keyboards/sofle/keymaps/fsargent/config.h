@@ -24,17 +24,6 @@ for more options.
 
 #define EE_HANDS
 
-//Add RGB underglow
-#define RGB_DI_PIN D3
-#define RGBLED_NUM 74
-#define RGBLED_SPLIT {37,37}
-//#define RGBLIGHT_ANIMATIONS
-#define RGBLIGHT_LIMIT_VAL 60
-#define RGBLIGHT_DEFAULT_HUE 224
-#define RGBLIGHT_DEFAULT_SAT 10
-#define RGBLIGHT_SLEEP
-
-
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define NO_ACTION_ONESHOT
