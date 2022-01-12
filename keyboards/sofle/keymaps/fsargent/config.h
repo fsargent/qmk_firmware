@@ -28,6 +28,10 @@ for more options.
 #define NO_ACTION_FUNCTION
 #define NO_ACTION_ONESHOT
 #define TAPPING_TOGGLE 2
+#define RGBLIGHT_DEFAULT_HUE 224
+#define RGBLIGHT_DEFAULT_SAT 10
+#define RGBLIGHT_SLEEP
+
 
 #ifndef NO_DEBUG
 #define NO_DEBUG
