@@ -30,8 +30,8 @@ for more options.
 #define RGBLED_SPLIT {37,37}
 #define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_LAYERS
-#define RGBLIGHT_LIMIT_VAL 60
-#define RGBLIGHT_DEFAULT_HUE 224
+#define RGBLIGHT_LIMIT_VAL 100 // Important to not over value, otherwise the RGB underglow will be too bright
+#define RGBLIGHT_DEFAULT_HUE 127
 #define RGBLIGHT_DEFAULT_SAT 10
 #define RGBLIGHT_SLEEP
 

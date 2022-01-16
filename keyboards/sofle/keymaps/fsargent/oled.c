@@ -35,19 +35,19 @@ static void print_status_narrow(void) {
         case 0:
             oled_write_P(PSTR("OS X\n"), false);
             break;
-        case 1:
+        case 2:
             oled_write_P(PSTR("WIN\n"), false);
             break;
-        case 2:
+        case 3:
             oled_write_P(PSTR("GAME\n"), false);
             break;
-        case 3:
+        case 4:
             oled_write_P(PSTR("SYM\n"), true);
             break;
-        case 4:
+        case 5:
             oled_write_P(PSTR("NAV\n"), true);
             break;
-        case 5:
+        case 6:
             oled_write_P(PSTR("W NAV"), true);
             break;
 
@@ -58,7 +58,7 @@ static void print_status_narrow(void) {
     if (keymap_config.swap_lctl_lgui) {
         oled_write_ln_P(PSTR("SWAP"), true);
     } else {
-        oled_write_ln_P(PSTR(SWAP"), false);
+        oled_write_ln_P(PSTR("SWAP"), false);
     }
     // led_t led_usb_state = host_keyboard_led_state();
     // oled_write_ln_P(PSTR("\n\n\n\n\n\n\n//\nFelix"), led_usb_state.caps_lock);
