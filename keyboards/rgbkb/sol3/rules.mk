@@ -21,6 +21,7 @@ COMMAND_ENABLE = no         # Commands for debug and configuration
 NKRO_ENABLE = yes           # Enable N-Key Rollover
 AUDIO_ENABLE = yes          # Audio output
 AUDIO_DRIVER = dac_additive
+COMBO_ENABLE = yes
 
 DYNAMIC_MACRO_ENABLE = yes
 DIP_SWITCH_ENABLE = yes
@@ -47,3 +48,4 @@ OPT_DEFS += -DOLED_FONT_H=\"keyboards/rgbkb/common/glcdfont.c\"
 # SRC += matrix.c
 
 DEFAULT_FOLDER = rgbkb/sol3/rev1
+VPATH += keyboards/gboards
