@@ -1,4 +1,69 @@
-SUBS(sqbrace, "[]", KC_J, KC_K)
-SUBS(brace, "()", KC_K, KC_L)
-SUBS(cbrace, "{}", KC_H, KC_J)
-SUBS(email, "felix.sargent@gmail.com", KC_E, KC_M)
+COMB(AB_ESC, KC_ESC, KC_A, KC_B)
+COMB(asdf_combo, KC_A, KC_S, KC_D, KC_F)
+COMB(zxcv_combo, KC_Z, KC_X, KC_C, KC_V)
+COMB(uiop_combo, KC_U, KC_I, KC_O, KC_P)
+COMB(jklsemi_combo, KC_J, KC_K, KC_L, KC_SCLN)
+COMB(thumbs_combo, MO(4), LT(3, KC_ENT))
+COMB(win_thumbs_combo, MO(5), LT(3, KC_ENT))
+COMB(OSX_CUT, G(KC_X), KC_Z, KC_X)
+COMB(OSX_CPY, G(KC_C), KC_X, KC_C)
+COMB(OSX_PST, G(KC_V), KC_C, KC_V)
+COMB(WIN_CUT, C(KC_X), KC_Z, KC_X)
+COMB(WIN_CPY, C(KC_C), KC_X, KC_C)
+COMB(WIN_PST, C(KC_V), KC_C, KC_V)
+COMB(WIN_DELWD, C(KC_BSPC), KC_D, KC_F)
+SUBS(SEL_WORD, SS_DOWN(X_LALT) SS_TAP(X_LEFT) SS_DOWN(X_LSFT) SS_TAP(X_RIGHT) SS_UP(X_LSFT) SS_UP(X_LALT), KC_Z, KC_X, KC_C, KC_V)
+// COMB()
+// COMB()
+// COMB()
+// enum combo_events { RST, SEL_WORD, SEL_LINE, WINTGSYM, TGSYM, CTRLALTDEL, CTRLC, CTRLR, CUT, CPY, PST, CAL, DELWD, EML, PHONE, EMW, WINDELWD, COMBO_LENGTH };
+// uint16_t COMBO_LEN = COMBO_LENGTH;  // remove the COMBO_COUNT define and use this instead!
+
+// const uint16_t PROGMEM asdf_combo[]       = {KC_A, KC_S, KC_D, KC_F, COMBO_END};
+// const uint16_t PROGMEM zxcv_combo[]       = {KC_Z, KC_X, KC_C, KC_V, COMBO_END};
+// const uint16_t PROGMEM uiop_combo[]       = {KC_U, KC_I, KC_O, KC_P, COMBO_END};
+// const uint16_t PROGMEM jklsemi_combo[]    = {KC_J, KC_K, KC_L, KC_SCLN, COMBO_END};
+// const uint16_t PROGMEM thumbs_combo[]     = {MO(4), LT(3, KC_ENT), COMBO_END};
+// const uint16_t PROGMEM win_thumbs_combo[] = {MO(5), LT(3, KC_ENT), COMBO_END};
+
+// const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
+// const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END};
+// const uint16_t PROGMEM cv_combo[] = {KC_C, KC_V, COMBO_END};
+// const uint16_t PROGMEM qr_combo[] = {KC_Q, KC_R, COMBO_END};
+// const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+// // const uint16_t PROGMEM qw_combo[] = {KC_Q, KC_W, COMBO_END};
+// // const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+// const uint16_t PROGMEM gravminus_combo[] = {KC_GRV, KC_MINUS, COMBO_END};
+
+// const uint16_t PROGMEM xcv_combo[] = {KC_X, KC_C, KC_V, COMBO_END};
+
+// const uint16_t PROGMEM cal_combo[]   = {KC_C, KC_A, KC_L, COMBO_END};
+// const uint16_t PROGMEM phone_combo[] = {KC_P, KC_Q, COMBO_END};
+// const uint16_t PROGMEM eml_combo[]   = {KC_E, KC_M, KC_L, COMBO_END};
+// const uint16_t PROGMEM emw_combo[]   = {KC_E, KC_W, KC_M, COMBO_END};
+
+// combo_t key_combos[] = {
+
+//     // 2 key combos
+//     [CUT]      = COMBO_ACTION(zx_combo),
+//     [CPY]      = COMBO_ACTION(xc_combo),
+//     [PST]      = COMBO_ACTION(cv_combo),
+//     [CTRLR]    = COMBO_ACTION(qr_combo),
+//     [DELWD]    = COMBO_ACTION(df_combo),
+//     [TGSYM]    = COMBO_ACTION(thumbs_combo),
+//     [WINTGSYM] = COMBO_ACTION(win_thumbs_combo),
+//     [RST]      = COMBO_ACTION(gravminus_combo),
+
+//     // 3 key combos
+//     [SEL_WORD] = COMBO_ACTION(xcv_combo),
+
+//     // 4 key combos
+//     //     [CMD_ENTER]  = COMBO_ACTION(asdf_combo),
+//     [SEL_LINE]   = COMBO_ACTION(zxcv_combo),
+//     [CTRLALTDEL] = COMBO_ACTION(jklsemi_combo),
+
+//     // Misc
+//     [CAL]   = COMBO_ACTION(cal_combo),
+//     [EML]   = COMBO_ACTION(eml_combo),
+//     [PHONE] = COMBO_ACTION(phone_combo),
+//     [EMW]   = COMBO_ACTION(efmw_combo)};

@@ -25,7 +25,8 @@ uint16_t alt_tab_timer = 0;        // we will be using them soon.
 #include "encoder.c"
 #include "oled.c"
 #include "rgb.c"
-#include "combos.c"
+// #include "combos.c"
+#include "g/keymap_combo.h"
 
 
 // The very important timer.

@@ -13,3 +13,4 @@ RGBLIGHT_ENABLE = yes
 SPACE_CADET_ENABLE = no
 SWAP_HANDS_ENABLE=no
 VIA_ENABLE = no
+VPATH += keyboards/gboards
