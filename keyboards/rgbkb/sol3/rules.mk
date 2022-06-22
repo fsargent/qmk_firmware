@@ -14,7 +14,7 @@ QUANTUM_LIB_SRC += i2c_master.c
 #   change yes to no to disable
 #
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite
-MOUSEKEY_ENABLE = no        # Mouse keys
+MOUSEKEY_ENABLE = yes        # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 CONSOLE_ENABLE = yes        # Console for debug
 COMMAND_ENABLE = no         # Commands for debug and configuration
@@ -48,4 +48,4 @@ OPT_DEFS += -DOLED_FONT_H=\"keyboards/rgbkb/common/glcdfont.c\"
 # SRC += matrix.c
 
 DEFAULT_FOLDER = rgbkb/sol3/rev1
-VPATH += keyboards/gboards
+# VPATH += keyboards/gboards
