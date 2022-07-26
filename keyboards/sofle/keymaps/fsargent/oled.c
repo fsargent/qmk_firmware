@@ -162,11 +162,13 @@ void render_encoder_status(void) {
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
         print_status_narrow();
-        oled_set_cursor(0, 15);
+        oled_set_cursor(0, 13);
+        oled_write_ln_P(PSTR("Layer"), false); // left right
         render_encoder_status();
     } else {
         print_status_narrow();
-        oled_set_cursor(0, 15);
+        oled_set_cursor(0, 13);
+        oled_write_ln_P(PSTR("Knob "), false); // left right
         render_encoder_status();
     }
     return false;
