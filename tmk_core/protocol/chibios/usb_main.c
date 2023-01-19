@@ -112,8 +112,10 @@ static const USBDescriptor *usb_get_descriptor_cb(USBDriver *usbp, uint8_t dtype
     (void)usbp;
     static USBDescriptor desc;
     uint16_t             wValue = ((uint16_t)dtype << 8) | dindex;
+    uint16_t             wLength = usbp->setup[6] | (usbp->setup[7] << 8U);
     desc.ud_string              = NULL;
-    desc.ud_size                = get_usb_descriptor(wValue, wIndex, (const void **const) & desc.ud_string);
+    desc.ud_size                = get_usb_descriptor(wValue, wIndex, wLength, (const void **const) & desc.ud_string);
+//     desc.ud_size                = get_usb_descriptor(wValue, wIndex, (const void **const) & desc.ud_string);
     if (desc.ud_string == NULL)
         return NULL;
     else
@@ -126,7 +128,7 @@ static const USBDescriptor *usb_get_descriptor_cb(USBDriver *usbp, uint8_t dtype
  * callback pointer is NULL.
  */
 static void dummy_usb_cb(USBDriver *usbp, usbep_t ep) {
-    (void)usbp;
+    (void)usbp;1
     (void)ep;
 }
 

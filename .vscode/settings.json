@@ -28,5 +28,11 @@
     "[json]": {
 	    "editor.formatOnSave": false
     },
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "favorites.resources": [
+        {
+            "filePath": "keyboards/rgbkb/sol3/keymaps/fsargent/keymap.c",
+            "group": "Default"
+        }
+    ]
 }

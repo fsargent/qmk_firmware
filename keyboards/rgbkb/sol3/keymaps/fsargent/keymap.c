@@ -8,6 +8,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "guess_os.h"
 
 /* Qwerty
  * ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┐  ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┐
@@ -47,7 +48,9 @@ enum sol_keycodes {
 	MENU_BTN,
 	MENU_UP,
 	MENU_DN,
-	RGB_RST
+	RGB_RST,
+	USR_COPY,
+	USR_PASTE
 };
 
 #define FN		MO(_FN)
@@ -88,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 	[_MAC] = LAYOUT(
-	LT(_MEH,KC_GRV),	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,	TO(_WIN),			KC_NO,	KC_6,	KC_7,	KC_8,	KC_9,	KC_0,	KC_MINUS,
+	LT(_MEH,KC_GRV),	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,	TO(_WIN),			KC_NO,	KC_6,	KC_7,	KC_8,	KC_9,	KC_0,	USR_COPY,
 	KC_TAB,			KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,	TO(_GAME),		KC_NO,	KC_Y,	KC_U,	KC_I,	KC_O,	KC_P,	KC_BSLS,
 	MEHESC,			KC_A,	KC_S,	KC_D,	KC_F,	KC_G,	KC_LBRC,			KC_VOLU,	KC_H,	KC_J,	KC_K,	KC_L,	KC_SCLN,	KC_QUOT,
 	KC_LSFT,			KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	KC_LCBR,			KC_VOLD,	KC_N,	KC_M,	KC_COMM,	KC_DOT,	KC_SLSH,	KC_RSFT,
@@ -227,6 +230,12 @@ bool process_record_user(uint16_t keycode,	keyrecord_t *record) {
 				touch_encoder_toggle();
 			}
 			return false;	// Skip all further processing of this key
+		case USR_COPY:
+			process_platform_combo(keycode, record);
+			return false;
+		case USR_PASTE:
+			process_platform_combo(keycode, record);
+			return false;
 		default:
 			return true;
 	}
@@ -472,4 +481,33 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 		  }
 		  break;
     }
+}
+
+void process_platform_combo(uint16_t keycode, keyrecord_t *record) {
+  uint8_t host_os = guess_host_os();
+  uint16_t keycode_to_press = KC_NO;
+  if (host_os == OS_MACOS || host_os == OS_IOS) {
+    switch (keycode) {
+      case USR_COPY:
+        keycode_to_press = G(KC_C);
+        break;
+      case USR_PASTE:
+        keycode_to_press = G(KC_V);
+        break;
+    }
+  } else {
+    switch (keycode) {
+      case USR_COPY:
+        keycode_to_press = C(KC_C);
+        break;
+      case USR_PASTE:
+        keycode_to_press = C(KC_V);
+        break;
+    }
+  }
+  if (record->event.pressed) {
+    register_code16(keycode_to_press);
+  } else {
+    unregister_code16(keycode_to_press);
+  }
 }

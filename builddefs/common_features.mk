@@ -907,3 +907,5 @@ ifeq ($(strip $(ENCODER_ENABLE)), yes)
         OPT_DEFS += -DENCODER_MAP_ENABLE
     endif
 endif
+
+SRC +=$(QUANTUM_DIR)/guess_os.c
