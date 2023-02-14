@@ -15,18 +15,8 @@
  */
 
 #pragma once
-#include "config_common.h"
 
 #define RGBLIGHT_EFFECT_RAINBOW_MOOD
-
-/* key matrix size */
-#define MATRIX_ROWS 1
-#define MATRIX_COLS 1
-
-/* Uno default pinout */
-#define DIRECT_PINS { \
-    { B6 } \
-}
 
 #ifdef RGBLIGHT_ENABLE
 #define RGB_DI_PIN F6
@@ -48,6 +38,3 @@
 //   #define RGBLIGHT_EFFECT_BREATHE_CENTER 1.85  // 1 to 2.7
 //   #define RGBLIGHT_EFFECT_BREATHE_MAX    255   // 0 to 255
 // #endif
-
-/* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5

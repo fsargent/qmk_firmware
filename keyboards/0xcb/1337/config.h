@@ -16,19 +16,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
 
-#include "config_common.h"
 // clang-format off
 
-/* key matrix size */
-#define MATRIX_ROWS 3
-#define MATRIX_COLS 3
-
-/* Keyboard Matrix Assignments */
-#define DIRECT_PINS { \
-    { D2, D4, F4 }, \
-    { D7, B1, B3 }, \
-    { E6, B4, B2 } \
-}
 #define TAP_CODE_DELAY 10
 #define ENCODER_RESOLUTION 4
 #define ENCODERS_PAD_A { F6 }
@@ -64,9 +53,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   #define RGBLIGHT_DEFAULT_SPD 2
 #endif
 // clang-format on
-
-/* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE

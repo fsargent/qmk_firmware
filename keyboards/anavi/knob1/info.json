@@ -5,7 +5,6 @@
     "maintainer": "leon-anavi",
     "processor": "RP2040",
     "bootloader": "rp2040",
-    "debounce": 5,
     "features": {
         "bootmagic": false,
         "command": false,
@@ -43,6 +42,11 @@
 		    "pin_b": "GP28",
 		    "resolution": 2
 	    }
+        ]
+    },
+    "matrix_pins": {
+        "direct": [
+            ["GP26"]
         ]
     },
     "layouts": {
