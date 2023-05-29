@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <stdint.h>
 #include "report.h"
+#include "modifiers.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,11 +30,17 @@ extern report_keyboard_t *keyboard_report;
 void send_keyboard_report(void);
 
 /* key */
-inline void add_key(uint8_t key) { add_key_to_report(keyboard_report, key); }
+inline void add_key(uint8_t key) {
+    add_key_to_report(keyboard_report, key);
+}
 
-inline void del_key(uint8_t key) { del_key_from_report(keyboard_report, key); }
+inline void del_key(uint8_t key) {
+    del_key_from_report(keyboard_report, key);
+}
 
-inline void clear_keys(void) { clear_keys_from_report(keyboard_report); }
+inline void clear_keys(void) {
+    clear_keys_from_report(keyboard_report);
+}
 
 /* modifier */
 uint8_t get_mods(void);
@@ -49,13 +56,6 @@ void    del_weak_mods(uint8_t mods);
 void    set_weak_mods(uint8_t mods);
 void    clear_weak_mods(void);
 
-/* macro modifier */
-uint8_t get_macro_mods(void);
-void    add_macro_mods(uint8_t mods);
-void    del_macro_mods(uint8_t mods);
-void    set_macro_mods(uint8_t mods);
-void    clear_macro_mods(void);
-
 /* oneshot modifier */
 uint8_t get_oneshot_mods(void);
 void    add_oneshot_mods(uint8_t mods);
@@ -65,8 +65,10 @@ void    clear_oneshot_mods(void);
 bool    has_oneshot_mods_timed_out(void);
 
 uint8_t get_oneshot_locked_mods(void);
+void    add_oneshot_locked_mods(uint8_t mods);
 void    set_oneshot_locked_mods(uint8_t mods);
 void    clear_oneshot_locked_mods(void);
+void    del_oneshot_locked_mods(uint8_t mods);
 
 typedef enum { ONESHOT_PRESSED = 0b01, ONESHOT_OTHER_KEY_PRESSED = 0b10, ONESHOT_START = 0b11, ONESHOT_TOGGLED = 0b100 } oneshot_fullfillment_t;
 void    set_oneshot_layer(uint8_t layer, uint8_t state);
