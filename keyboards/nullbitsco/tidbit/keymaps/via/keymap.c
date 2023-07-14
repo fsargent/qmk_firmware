@@ -16,6 +16,7 @@
 
 #include QMK_KEYBOARD_H
 
+<<<<<<< HEAD
 #define _BASE     0
 #define _VIA1     1
 #define _VIA2     2
@@ -77,3 +78,46 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
   } 
   return true;
 }
+=======
+enum layers {
+    _BASE = 0,
+    _VIA1,
+    _VIA2,
+    _VIA3
+};
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [_BASE] = LAYOUT(
+                            KC_PSLS, KC_PAST, KC_PMNS, 
+  KC_VOLD, KC_VOLU, KC_P7, KC_P8,   KC_P9,   KC_PPLS, 
+  KC_TRNS, KC_TRNS, KC_P4, KC_P5,   KC_P6,   KC_PPLS, 
+  KC_TRNS, KC_TRNS, KC_P1, KC_P2,   KC_P3,   KC_PENT, 
+  KC_TRNS, KC_TRNS, KC_P0, KC_P0,   KC_PDOT, KC_PENT  
+  ),
+
+  [_VIA1] = LAYOUT(
+                  ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___  
+  ),
+
+  [_VIA2] = LAYOUT(
+                  ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___
+  ),
+
+  [_VIA3] = LAYOUT(
+                  ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___, 
+  ___, ___, ___, ___, ___, ___
+  ),
+};
+
+>>>>>>> origin/master
