@@ -15,13 +15,11 @@ COMMAND_ENABLE = no         # Commands for debug and configuration
 NKRO_ENABLE = yes           # Enable N-Key Rollover
 AUDIO_ENABLE = yes          # Audio output
 AUDIO_DRIVER = dac_additive
-COMBO_ENABLE = yes
 OS_DETECTION_ENABLE = yes
 
 DYNAMIC_MACRO_ENABLE = yes
 DIP_SWITCH_ENABLE = yes
-DEFERRED_EXEC_ENABLE = yes
-WS2812_DRIVER = pwm
+
 RGBLIGHT_ENABLE = no
 RGB_MATRIX_ENABLE = yes
 
@@ -38,4 +36,6 @@ OPT = 3
 OPT_DEFS += -DOLED_FONT_H=\"keyboards/rgbkb/common/glcdfont.c\"
 
 DEFAULT_FOLDER = rgbkb/sol3/rev1
-# VPATH += keyboards/gboards
+
+DEFERRED_EXEC_ENABLE = yes
+COMBO_ENABLE = yes
