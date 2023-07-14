@@ -1,7 +1,7 @@
 // Place your settings in this file to overwrite default and user settings.
 {
     // Unofficially, QMK uses spaces for indentation
-    "editor.insertSpaces": true,
+    "editor.insertSpaces": false,
     // Configure glob patterns for excluding files and folders.
     "files.exclude": {
         "**/.build": true,
@@ -25,7 +25,10 @@
         "files.trimTrailingWhitespace": false
     },
     "python.formatting.provider": "yapf",
-    "[json]": {
-	    "editor.formatOnSave": false
-    }
+    // "[json]": {
+        // "editor.formatOnSave": false
+    // },
+    "clangd.arguments": [
+        "--header-insertion=never"
+    ]
 }

@@ -16,8 +16,8 @@
 
 #define TAPPING_TERM 200
 
-#define ENCODERS_PAD_A { B3, D2 }
-#define ENCODERS_PAD_B { B2, D3 }
+// #define ENCODERS_PAD_A { B3, D2 }
+// #define ENCODERS_PAD_B { B2, D3 }
 
 #define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_SWIRL
 

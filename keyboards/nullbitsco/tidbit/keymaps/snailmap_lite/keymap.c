@@ -16,50 +16,6 @@
 
 #include QMK_KEYBOARD_H
 
-<<<<<<< HEAD
-enum custom_keycodes {
-    KC_CUST = SAFE_RANGE,
-};
-
-enum layer_names {
-  _LAY0,
-  _LAY1,
-  _LAY2,
-  _LAY3
-};
-
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  // Base layer (numpad)
-  [_LAY0] = LAYOUT(
-           KC_PSLS,  KC_KP_ASTERISK, KC_KP_MINUS, 
-  KC_KP_7, KC_KP_8,  KC_KP_9,        KC_KP_PLUS, 
-  KC_KP_4, KC_KP_5,  KC_KP_6,        KC_NO, 
-  KC_KP_1, KC_KP_2,  KC_KP_3,        KC_PENT, 
-  KC_KP_0, KC_KP_0,  KC_KP_DOT,      KC_NO 
-  ),
-  // Function layer (numpad)
-  [_LAY1] = LAYOUT(
-           KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO
-  ),
-  [_LAY2] = LAYOUT(
-           KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO
-  ),
-  [_LAY3] = LAYOUT(
-           KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO
-  ),
-=======
 enum layer_names {
     _LAY0,
     _LAY1,
@@ -77,29 +33,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_LAY1] = LAYOUT(
-                    ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___  
+                      _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______  
     ),
 
     [_LAY2] = LAYOUT(
-                    ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___
+                      _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______
     ),
 
     [_LAY3] = LAYOUT(
-                    ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___, 
-    ___, ___, ___, ___, ___, ___
+                      _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______, 
+    _______, _______, _______, _______, _______, _______
     ),
->>>>>>> origin/master
 };
 
 #ifdef OLED_ENABLE
@@ -205,28 +160,14 @@ static void render_wpm_counters(uint8_t current_wpm) {
     uint8_t cursorposition_cur = 13;
     uint8_t cursorposition_max = 14;
 
-<<<<<<< HEAD
-    char wpm_counter[4];
-    wpm_counter[3] = '\0';
-    wpm_counter[2] = '0' + current_wpm % 10;
-    wpm_counter[1] = '0' + (current_wpm / 10) % 10;
-    wpm_counter[0] = '0' + (current_wpm / 100) % 10;
-    oled_set_cursor(0, cursorposition_cur);
-    oled_write(wpm_counter, false);
-=======
     oled_set_cursor(0, cursorposition_cur);
     oled_write(get_u8_str(current_wpm, '0'), false);
->>>>>>> origin/master
 
     if (current_wpm > oled_data.max_wpm) {
         oled_data.max_wpm = current_wpm;
         oled_data.wpm_limit = oled_data.max_wpm + 20;
         oled_set_cursor(0, cursorposition_max);
-<<<<<<< HEAD
-        oled_write(wpm_counter, false);
-=======
         oled_write(get_u8_str(current_wpm, '0'), false);
->>>>>>> origin/master
     }
 }
 
@@ -310,11 +251,7 @@ static void render_wpm_graph(uint8_t current_wpm) {
 }
 
 // Call OLED functions
-<<<<<<< HEAD
-void oled_task_user(void) {
-=======
 bool oled_task_user(void) {
->>>>>>> origin/master
     // Draw OLED keyboard, prevent redraw
     if (oled_data.first_loop) {
         render_background();
@@ -322,15 +259,6 @@ bool oled_task_user(void) {
     }
     // Get current WPM, subtract 25% for accuracy and prevent large jumps caused by simultaneous keypresses
     uint8_t current_wpm = get_current_wpm();
-<<<<<<< HEAD
-    // Note: This will most likely be removed once QMK's WPM calculation is updated
-    current_wpm -= current_wpm >> 2;
-    if (current_wpm > oled_data.wpm_limit) {
-        current_wpm = oled_data.max_wpm;
-        set_current_wpm(oled_data.max_wpm);
-    }
-=======
->>>>>>> origin/master
     // Write active layer name to display
     render_layer_state();
     // Update WPM counters
@@ -344,10 +272,7 @@ bool oled_task_user(void) {
         render_wpm_graph(current_wpm);
         oled_data.timer = timer_read();
     }
-<<<<<<< HEAD
-=======
     return false;
->>>>>>> origin/master
 }
 #endif
 
@@ -356,38 +281,3 @@ bool wpm_keycode_user(uint16_t keycode) {
     return true;
 }
 
-<<<<<<< HEAD
-// Called by QMK during key processing
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // Forwards keystrokes from an external input device over UART/TRRS
-    process_record_remote_kb(keycode, record);
-
-    return true;
-}
-
-// Rotary encoder behavior - Change volume on default layer, RGB/OLED on other layers
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (layer_state_is(0)) {
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    } else {
-        // You can do other things in higher layers
-        // Add them here based on the layer number
-    }
-    return true;
-}
-
-// Initialize remote keyboard, if connected
-void matrix_init_user(void) {
-    matrix_init_remote_kb();
-}
-
-// Scan and parse keystrokes from remote keyboard, if connected
-void matrix_scan_user(void) {
-    matrix_scan_remote_kb();
-}
-=======
->>>>>>> origin/master

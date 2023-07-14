@@ -1,30 +1,4 @@
 /* Copyright 2021 Jay Greco
-<<<<<<< HEAD
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-#include QMK_KEYBOARD_H
-
-// Use Bit-C LED to show NUM LOCK status
-bool led_update_kb(led_t led_state) {
-    bool res = led_update_user(led_state);
-    if (res) {
-        set_bitc_LED(led_state.num_lock ? LED_DIM : LED_OFF);
-    }
-    return res;
-=======
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -40,7 +14,9 @@ bool led_update_kb(led_t led_state) {
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include QMK_KEYBOARD_H
+#include "quantum.h"
+#include "common/remote_kb.h"
+#include "common/bitc_led.h"
 
 typedef struct PACKED {
     uint8_t r;
@@ -111,15 +87,11 @@ bool oled_task_kb(void) {
 #endif
 
 static void process_encoder_matrix(encodermap_t pos) {
-    action_exec((keyevent_t){
-        .key = (keypos_t){.row = pos.r, .col = pos.c}, .pressed = true, .time = (timer_read() | 1) /* time should not be 0 */
-    });
+    action_exec(MAKE_KEYEVENT(pos.r, pos.c, true));
 #if TAP_CODE_DELAY > 0
     wait_ms(TAP_CODE_DELAY);
 #endif
-    action_exec((keyevent_t){
-        .key = (keypos_t){.row = pos.r, .col = pos.c}, .pressed = false, .time = (timer_read() | 1) /* time should not be 0 */
-    });
+    action_exec(MAKE_KEYEVENT(pos.r, pos.c, false));
 }
 
 bool encoder_update_kb(uint8_t index, bool clockwise) {
@@ -176,5 +148,4 @@ void matrix_init_kb(void) {
 void matrix_scan_kb(void) {
     matrix_scan_remote_kb();
     matrix_scan_user();
->>>>>>> origin/master
 }
