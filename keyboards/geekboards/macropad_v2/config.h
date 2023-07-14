@@ -14,9 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#pragma once
+
 #define RGBLED_NUM 42
 #define RGB_MATRIX_LED_COUNT 42
-#define RGB_DI_PIN A7
 
 // PWM RGB Underglow Defines
 #define WS2812_PWM_DRIVER PWMD3

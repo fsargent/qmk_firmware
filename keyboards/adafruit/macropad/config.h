@@ -37,28 +37,23 @@
 #define SPI_MOSI_PIN GP27
 #define SPI_MISO_PIN GP28
 
-/* Encoders */
-#define ENCODERS_PAD_A { GP18 }
-#define ENCODERS_PAD_B { GP17 }
-
-/* Bootmagic lite */
-/* (Press the key below the encoder button while plugging the keyboard to enter the bootloader and clear flash) */
-#define BOOTMAGIC_LITE_ROW 1
-#define BOOTMAGIC_LITE_COLUMN 2
-
 /* Double tap the side button to enter bootloader */
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED GP13
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 500U
 
-/* Audio (Unsupported for now)*/
-// #define AUDIO_PIN GP16
-// #define SPEAKER_SHUTDOWN GP14
+/* Audio */
+#define AUDIO_PIN GP16
+#define AUDIO_PWM_DRIVER PWMD0
+#define AUDIO_PWM_CHANNEL RP2040_PWM_CHANNEL_A
+#define AUDIO_INIT_DELAY
+#define AUDIO_CLICKY
+
+#define SPEAKER_SHUTDOWN GP14
 
 #ifdef RGB_MATRIX_ENABLE
 
      /* RGB Defines */
-#    define RGB_DI_PIN GP19
 #    define RGB_MATRIX_LED_COUNT 12
 #    define RGBLED_NUM 12
 

@@ -17,15 +17,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define BACKLIGHT_PIN D7
-#define BACKLIGHT_BREATHING
-#define BACKLIGHT_LEVELS 3
 #define RGBLIGHT_SLEEP
 
 
 /* ws2812B RGB LED */
 #ifdef RGBLIGHT_ENABLE
-#   define RGB_DI_PIN F4
 #    define RGBLIGHT_EFFECT_BREATHING
 #    define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #    define RGBLIGHT_EFFECT_RAINBOW_SWIRL
@@ -40,7 +36,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define RGBLIGHT_HUE_STEP 10
 #    define RGBLIGHT_SAT_STEP 17
 #    define RGBLIGHT_VAL_STEP 17
-#    define RGBLIGHT_LIMIT_VAL 255
 #endif
 
 #ifdef OLED_ENABLE

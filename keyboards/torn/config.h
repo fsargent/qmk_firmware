@@ -45,11 +45,4 @@
 /* COL2ROW, ROW2COL*/
 #define DIODE_DIRECTION COL2ROW
 
-#define ENCODERS_PAD_A \
-    { B2 }
-#define ENCODERS_PAD_B \
-    { B1 }
-
-#define USB_MAX_POWER_CONSUMPTION 100
-
 #define OLED_TIMEOUT 60000

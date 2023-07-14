@@ -23,17 +23,11 @@ where some things are disabled to save space as well.
 
 #pragma once
 
-/* Backlight Setup */
-// Looks like each backlight LED is connected to a single output, D5 is the one furtherst away from USB port
-#define BACKLIGHT_PIN D5
-#define BACKLIGHT_LEVELS 6
-
 /* RGB Underglow
 This will not be used, as RGBLIGHT_ENABLE is set to 'no' in rules.mk
 We do not have enough space in the flash for this at the moment, maybe
 further optimizations can be done on that side.
 */
-#define RGB_DI_PIN C6
 #define RGBLIGHT_EFFECT_STATIC_GRADIENT
 #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 #define RGBLED_NUM 2

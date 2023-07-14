@@ -3,20 +3,7 @@
 
 #pragma once
 
-// clang-format off
-
-// Encoder pins.
-// Encoder numbering (assuming the default board orientation with encoders on
-// the top side):
-//   0 - left
-//   1 - center (with a longer shaft and a larger knob)
-//   2 - right
-#define ENCODERS_PAD_A { F1, B0, B3 }
-#define ENCODERS_PAD_B { F0, B1, B7 }
-#define ENCODER_RESOLUTION 4
-
 // Encoder mappings (used for VIA).
-#define ENCODERS 3
 #define ENCODERS_CW_KEY  { { 22, 0 }, { 18, 0 }, { 20, 0 } }
 #define ENCODERS_CCW_KEY { { 23, 0 }, { 19, 0 }, { 21, 0 } }
 
@@ -25,9 +12,7 @@
 // RGB LED parameters.
 // This PCB uses a single chain of WS2812-compatible addressable RGB LEDs for
 // per-key backlight and underglow.
-#define RGB_DI_PIN F7
 #define RGBLED_NUM 27
-#define RGBLIGHT_LIMIT_VAL 150
 
 // RGB Lighting configuration.  This mode is used by the vendor firmware, and
 // can be chosen if the full RGB Matrix support is not desired for some reason.
@@ -50,7 +35,7 @@
 // RGB Matrix configuration.
 #ifdef RGB_MATRIX_ENABLE
 #    define RGB_MATRIX_LED_COUNT RGBLED_NUM
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS RGBLIGHT_LIMIT_VAL
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150
 
 #    define RGB_MATRIX_CENTER \
         { 35, 35 }

@@ -17,23 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define ENCODERS_PAD_A { B4 }
-#define ENCODERS_PAD_B { D7 }
-
-// #define QMK_ESC_OUTPUT B7
-// #define QMK_ESC_INPUT C6
-// #define QMK_SPEAKER B6
-
 #define AUDIO_PIN B6
 #define AUDIO_CLICKY
 #define NO_MUSIC_MODE
 
-#define RGB_DI_PIN         B5
 #define RGBLED_NUM         5
 #define RGBLIGHT_HUE_STEP  8
 #define RGBLIGHT_SAT_STEP  8
 #define RGBLIGHT_VAL_STEP  8
-#define RGBLIGHT_LIMIT_VAL 255 /* The maximum brightness level */
 #define RGBLIGHT_SLEEP         /* If defined, the RGB lighting will be switched off when the host goes to sleep */
 #define RGBLIGHT_EFFECT_BREATHING
 #define RGBLIGHT_EFFECT_RAINBOW_MOOD
@@ -51,7 +42,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define DRV_GREETING       alert_750ms
 #define DRV_MODE_DEFAULT   buzz
-// EC11K encoders have a different resolution than other EC11 encoders.
-// When using the default resolution of 4, if you notice your encoder skipping
-// every other tick, lower the resolution to 2.
-#define ENCODER_RESOLUTION 2

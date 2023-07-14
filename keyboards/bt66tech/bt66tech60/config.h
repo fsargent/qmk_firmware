@@ -17,20 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-/* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 14
-
-#define MATRIX_COL_PINS { B9, B8, B7, B6, B5, B4, B3, B11, A15, A10, A9, B14, B13, B12 }
-#define MATRIX_ROW_PINS { B10, B1, B0, A7, A6 }
-#define DIODE_DIRECTION COL2ROW
-
-#define BACKLIGHT_PIN A8
 #define BACKLIGHT_PWM_DRIVER PWMD1
 #define BACKLIGHT_PWM_CHANNEL 1
-#define BACKLIGHT_LEVELS 6
-#define BACKLIGHT_BREATHING
-#define BREATHING_PERIOD 6
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
@@ -47,7 +35,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_EFFECT_RGB_TEST
 #define RGBLIGHT_EFFECT_ALTERNATING
 #define RGBLIGHT_EFFECT_TWINKLE
-#define RGB_DI_PIN B15
 #define RGBLED_NUM 9
 #define WS2812_SPI SPID2
 #define WS2812_SPI_MOSI_PAL_MODE 5
@@ -55,8 +42,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * Feature disable options
  *  These options are also useful to firmware size reduction.
  */
-
-#define FORCE_NKRO
 
 /* disable debug print */
 //#define NO_DEBUG

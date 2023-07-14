@@ -38,12 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* COL2ROW, ROW2COL*/
 #define DIODE_DIRECTION ROW2COL
 
-#define LED_CAPS_LOCK_PIN D6
-#define LED_SCROLL_LOCK_PIN B4
-#define LED_PIN_ON_STATE 1
-
 #ifdef RGB_MATRIX_ENABLE
-#define RGB_DI_PIN E2
 #define RGB_MATRIX_LED_COUNT 42
 #define RGB_DISABLE_WHEN_USB_SUSPENDED // turn off effects when suspended
 #define RGB_MATRIX_LED_FLUSH_LIMIT 16 // limits in milliseconds how frequently an animation will update the LEDs. 16 (16ms) is equivalent to limiting to 60fps (increases keyboard responsiveness)
