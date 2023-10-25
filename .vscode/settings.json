@@ -28,5 +28,6 @@
     "[json]": {
 	    "editor.formatOnSave": false
     },
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "GitHooks.hooksDirectory": "/Users/fsargent/src/qmk_firmware/.git/hooks"
 }
