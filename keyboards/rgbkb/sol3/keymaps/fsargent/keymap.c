@@ -54,7 +54,6 @@ enum sol_keycodes {
 	RGB_RST
 };
 
-#define FN		MO(_FN)
 #define MEHESC		LT(_MEH, KC_ESC)
 #define HYPESC		MT(MOD_HYPR, KC_ESC)
 #define SYMTAB		LT(_NUM, KC_TAB)
@@ -70,7 +69,6 @@ enum sol_keycodes {
 #define BERRY 		KC_RPRN
 
 #define LTHUMB0		LT(_NAV, KC_BSPC)
-#define LTHUMB0WIN	LT(_NAV, KC_BSPC)
 #define LTHUMB1		MT(MOD_LCTL, KC_DEL)
 #define LTHUMB2		LT(_NUM, KC_TAB)
 
@@ -99,6 +97,28 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 			// Do not select the hold action when another key is pressed.
 			return false;
 	}
+}
+
+// OS-aware helpers for cross-platform shortcuts
+extern os_variant_t os_type;
+static inline bool is_apple_os(void) {
+    return os_type == OS_MACOS || os_type == OS_IOS;
+}
+
+static void send_os_shortcut_ctrlgui(uint16_t keycode) {
+    if (is_apple_os()) {
+        tap_code16(G(keycode));
+    } else {
+        tap_code16(C(keycode));
+    }
+}
+
+static void send_os_delete_word(void) {
+    if (is_apple_os()) {
+        tap_code16(A(KC_BSPC));
+    } else {
+        tap_code16(C(KC_BSPC));
+    }
 }
 
 #include "combos.c"
@@ -138,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	_______,	_______,	_______,	_______,	_______,	_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	_______,
 	_______,	_______,	_______,	_______,	_______,	_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	_______,
 	_______,	_______,	_______,	_______,	_______,	_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	_______,
-	_______,	_______,	_______,	_______,	MO(_WINNAV),	LTHUMB0WIN,	_______,	_______,	_______,	_______,	_______,	_______,	_______,	_______,	_______,	_______,
+	_______,	_______,	_______,	_______,	MO(_WINNAV),	LTHUMB0,	_______,	_______,	_______,	_______,	_______,	_______,	_______,	_______,	_______,	_______,
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 
@@ -353,4 +373,70 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 		ENCODER_CCW_CW(MENU_DN, MENU_UP), ENCODER_CCW_CW(MENU_DN, MENU_UP), ENCODER_CCW_CW(MENU_DN, MENU_UP)
 	}
 };
+#endif
+
+#ifdef KEY_OVERRIDE_ENABLE
+const key_override_t *key_overrides[] = { NULL };
+#endif
+
+// Per-key tap-hold and combo tuning
+#ifdef TAPPING_TERM_PER_KEY
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case M_A: case M_S: case M_D: case M_F:
+        case M_J: case M_K: case M_L: case M_SEMI:
+            return 230;
+        default:
+            return TAPPING_TERM;
+    }
+}
+#endif
+
+#ifdef PERMISSIVE_HOLD_PER_KEY
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case M_A: case M_S: case M_D: case M_F:
+        case M_J: case M_K: case M_L: case M_SEMI:
+            return true;
+        default:
+            return false;
+    }
+}
+#endif
+
+
+#ifdef QUICK_TAP_TERM
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LTHUMB1:
+        case LTHUMB2:
+            return 150;
+        default:
+            return QUICK_TAP_TERM;
+    }
+}
+#endif
+
+#if defined(COMBO_ENABLE)
+uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+    switch (index) {
+        case SEL_LINE:
+        case SEL_WORD:
+            return 70; // allow slightly more time for 3-4 key chords
+        default:
+            return COMBO_TERM;
+    }
+}
+
+bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+    switch (index) {
+        case DELWD:
+        case CUT:
+        case CPY:
+        case PST:
+            return true;
+        default:
+            return false;
+    }
+}
 #endif
