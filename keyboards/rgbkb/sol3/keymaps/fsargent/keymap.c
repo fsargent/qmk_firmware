@@ -23,7 +23,7 @@
 * ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤ 			 ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤
 * │Shift │   Z  │   X  │  C   │   V  │   B  │   [  │ 			 │VOLDN │   N  │   M  │   ,  │   .  │   /  │Shift │
 * ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤ 			 ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤
-* │ Ctrl │  Alt │  Win │  SYM │ NAV  │      │2Sym  │ 			 │2Ctrl │      │  _   │   =  │RGUI  │RALT  │RCTRL │
+* │ Ctrl │  Alt │  Win │  SYM │ NAV  │      │2Sym  │ 			 │2Ctrl │      │  (   │   [  |   ]  |   )  |SYM   │
 * └──────┴──────┴──────┴──────┴──────┤1BSpc ├──────┤ 			 ├──────┤ 3Spc ├──────┴──────┴──────┴──────┴──────┘
 *				     │      │3Ctrl │ 			 │1Enter│      │
 *				     └──────┴──────┘ 			 └──────┴──────┘
@@ -63,7 +63,7 @@ enum sol_keycodes {
 #define LBRC		MT(MOD_LALT, KC_LBRC)
 #define RBRC		MT(MOD_LGUI, KC_RBRC)
 
-#define MINUS		LT(_NUM, KC_LPRN)
+#define MINUS		KC_LPRN
 #define EQL		LT(_SYM, KC_LBRC)
 #define APPLE		KC_RBRC
 #define BERRY 		KC_RPRN
@@ -148,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		TO(_MAC),					KC_NO,		KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSLS,
 	HYPESC,		M_A,		M_S,		M_D,		M_F,		KC_G,		TO(_WIN),					KC_F11,		KC_H,		M_J,		M_K,		M_L,		M_SEMI,		KC_QUOT,
 	KC_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		TO(_GAME),					KC_F12,		KC_N,		KC_M,		KC_COMMA,	KC_DOT,		KC_SLSH,	KC_RSFT,
-	KC_LCTL,	S(G(KC_GRV)),	S(C(KC_TAB)), 	C(KC_TAB),   	G(KC_GRV),	LTHUMB0,	LTHUMB1,	LTHUMB2,	RTHUMB2,	RTHUMB1,	RTHUMB0,	MINUS,		EQL,		APPLE,		BERRY,		KC_RCTL,
+	KC_LCTL,	S(G(KC_GRV)),	S(C(KC_TAB)), 	C(KC_TAB),   	G(KC_GRV),	LTHUMB0,	LTHUMB1,	LTHUMB2,	RTHUMB2,	RTHUMB1,	RTHUMB0,	MINUS,		EQL,		APPLE,		BERRY,		TT(_SYM),
 	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,														KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO
 	),
 
@@ -165,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_NAV]		= LAYOUT(
 	C(KC_GRV),	KC_F1,		KC_F2,		KC_F3,		KC_F4,		KC_F5,		_______,					_______,	KC_F6,		KC_F7,		KC_F8,		KC_F9,		KC_F10,		KC_DEL,
 	C(KC_TAB),	A(KC_BSPC),	A(KC_LEFT),	KC_UP,		A(KC_RGHT),	A(KC_DEL),	_______,					_______,	KC_WH_U,	KC_WH_U,	KC_MS_U,	KC_WH_L,	KC_PGUP,	_______,
-	KC_MEH,		G(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	G(KC_RGHT),	_______,					KC_F11,		KC_WH_L,	M_J,		M_K,		M_L,		M_SEMI,		_______,
+	HYPESC,		G(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	G(KC_RGHT),	_______,					KC_F11,		KC_WH_L,	M_J,		M_K,		M_L,		M_SEMI,		_______,
 	KC_LSFT,	KC_HOME,	G(KC_DOWN),	KC_DEL,		G(KC_UP),	KC_END,		_______,					KC_F12,		KC_WH_D,	KC_WH_D,	KC_NO,		KC_NO,		KC_PGDN,	_______,
 	_______,	_______,	_______,	_______,	_______,	_______,	_______,	_______,	KC_BTN2,	MENU_BTN,	KC_BTN1,	KC_APP,		_______,	_______,	_______,	_______,
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
@@ -209,11 +209,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 
 	[_SYM]	= LAYOUT(
-	KC_GRV,		KC_GRV,		KC_LPRN,	KC_RPRN,	KC_SCLN,	KC_COMM,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	KC_BSPC,
-	KC_EXLM,	KC_LCBR,	KC_QUOT,	KC_DQT,		KC_RCBR,	KC_QUES,	_______,					_______,	KC_SCLN,	KC_LSFT,	KC_LCTL,	KC_LALT,	KC_LGUI,	_______,
+	KC_GRV,		KC_F1,		KC_F2,		KC_F3,		KC_F4,		KC_F5,		_______,					KC_NO,		KC_CIRC,	KC_HASH,	KC_DLR,		KC_TILD,	KC_EXLM,	KC_NUM,
+        KC_EXLM,	KC_LCBR,	KC_QUOT,	KC_DQT,		KC_RCBR,	KC_QUES,	_______,					KC_NO,		KC_SCLN,	KC_LSFT,	KC_LCTL,	KC_LALT,	KC_LGUI,	KC_NO,
 	KC_HASH,	KC_CIRC,	KC_EQL,		KC_UNDS,	KC_DLR,		KC_ASTR,	_______,					_______,	KC_DOT,		KC_BSPC,	KC_TAB,		KC_SPC,		KC_ENT,		_______,
-	KC_TILD,	KC_LT,		KC_PIPE,	KC_MINS,	KC_GT,		KC_SLSH,	_______,					_______,	KC_SLSH,	KC_DEL,		S(KC_TAB),	_______,	_______,	_______,
-	KC_AT,		KC_AMPR,	KC_LBRC,	KC_RBRC,	KC_PLUS,	KC_BSLS,	_______,	_______,	_______,	_______,	_______,	KC_LPRN,	KC_LBRC,	KC_RBRC,	KC_RPRN,	_______,
+	KC_TILD,	KC_LT,		KC_PIPE,	KC_MINS,	KC_GT,		KC_SLSH,	_______,					KC_NO,		KC_SLSH,	KC_DEL,		S(KC_TAB),	_______,	_______,	_______,
+	KC_AT,		KC_AMPR,	KC_LBRC,	KC_RBRC,	KC_PLUS,	KC_BSLS,	_______,	_______,	_______,	_______,	_______,	KC_LPRN,	KC_LBRC,	KC_RBRC,	KC_RPRN,	KC_NO,
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 };

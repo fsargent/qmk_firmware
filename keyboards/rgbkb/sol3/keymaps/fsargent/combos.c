@@ -21,6 +21,7 @@ enum combo_events {
     SD_GRAVE,
     M_COMMA_MINUS,
     DOT_COMMA_EQL,
+    CAPS_TOGGLE,
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN		= COMBO_LENGTH;  // remove the COMBO_COUNT define and use this instead!
@@ -46,6 +47,7 @@ const uint16_t PROGMEM gravminus_combo[]	= {KC_GRV, KC_DEL, COMBO_END};
 const uint16_t PROGMEM sd_combo[]		= {M_S, M_D, COMBO_END};
 const uint16_t PROGMEM m_comma_combo[]		= {KC_M, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM dot_comma_combo[]	= {KC_DOT, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM j_semi_combo[]		= {M_J, M_SEMI, COMBO_END};
 
 const uint16_t PROGMEM xcv_combo[]		= {KC_X, KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM sdf_combo[]		= {LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F), COMBO_END};
@@ -83,6 +85,7 @@ combo_t key_combos[]	= {
 
     [TOGGAME]	= COMBO_ACTION(toggame_combo),
     [TOGWIN]	= COMBO_ACTION(togwin_combo),
+    [CAPS_TOGGLE] = COMBO_ACTION(j_semi_combo),
 
     // 3–4 key actions
     [SEL_WORD]	= COMBO_ACTION(xcv_combo),
@@ -228,6 +231,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             break;
         case QP:
             if (pressed) { SEND_STRING("4158606970"); }
+            break;
+        case CAPS_TOGGLE:
+            if (pressed) { tap_code(KC_CAPS); }
             break;
     }
 }
