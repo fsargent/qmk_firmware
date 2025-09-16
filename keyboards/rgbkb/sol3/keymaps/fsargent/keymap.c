@@ -167,10 +167,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_NAV]		= LAYOUT(
 	C(KC_GRV),	KC_F1,		KC_F2,		KC_F3,		KC_F4,		KC_F5,		_______,					_______,	KC_F6,		KC_F7,		KC_F8,		KC_F9,		KC_F10,		KC_DEL,
-	C(KC_TAB),	A(KC_BSPC),	A(KC_LEFT),	KC_UP,		A(KC_RGHT),	A(KC_DEL),	_______,					_______,	KC_WH_U,	KC_WH_U,	KC_MS_U,	KC_WH_L,	KC_PGUP,	_______,
-	HYPESC,		G(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	G(KC_RGHT),	_______,					KC_F11,		KC_WH_L,	M_J,		M_K,		M_L,		M_SEMI,		_______,
-	KC_LSFT,	KC_HOME,	G(KC_DOWN),	KC_DEL,		G(KC_UP),	KC_END,		_______,					KC_F12,		KC_WH_D,	KC_WH_D,	KC_NO,		KC_NO,		KC_PGDN,	_______,
-	TO(_MAC),	_______,	_______,	_______,	_______,	_______,	_______,	_______,	KC_BTN2,	MENU_BTN,	KC_BTN1,	KC_APP,		_______,	_______,	_______,	TO(_MAC),
+	C(KC_TAB),	A(KC_BSPC),	A(KC_LEFT),	KC_UP,		A(KC_RGHT),	A(KC_DEL),	_______,					_______,	KC_WH_U,	KC_MS_L,	KC_MS_U,	KC_MS_D,	KC_MS_R,	_______,
+	HYPESC,		G(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	G(KC_RGHT),	_______,					KC_F11,		KC_WH_L,	M_J,		M_K,		M_L,		M_SEMI,		KC_WH_R,
+	KC_LSFT,	KC_HOME,	G(KC_DOWN),	KC_DEL,		G(KC_UP),	KC_END,		_______,					KC_F12,		KC_WH_D,	KC_WH_D,	KC_MS_U,	KC_WH_U,	KC_PGDN,	_______,
+	TO(_MAC),	_______,	_______,	_______,	_______,	_______,	_______,	_______,	KC_BTN2,	MENU_BTN,	KC_BTN1,	KC_MS_L,	KC_MS_D,	KC_MS_R,	_______,	TO(_MAC),
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 
