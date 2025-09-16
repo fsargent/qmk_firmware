@@ -1,4 +1,4 @@
-  /*
+ /*
  * ----------------------------------------------------------------------------
  * "THE BEER-WARE LICENSE" (Revision 42):
  * <https://github.com/Legonut> wrote this file.	As long as you retain this
@@ -69,8 +69,8 @@ enum sol_keycodes {
 #define BERRY 		KC_RPRN
 
 #define LTHUMB0		LT(_NAV, KC_BSPC)
-#define LTHUMB1		MT(MOD_LCTL, KC_DEL)
-#define LTHUMB2		LT(_NUM, KC_TAB)
+#define LTHUMB1		LT(_SYM, KC_DEL)
+#define LTHUMB2		OS_LSFT
 
 #define RTHUMB0		KC_SPC
 #define RTHUMB2		KC_ENT
@@ -93,6 +93,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 			return true;
 		case CTL_T(KC_BSPC):
 			return true;
+		// Prevent Alt home row mods from activating when typing fast
+		case M_S: case M_L:
+			return false;
 		default:
 			// Do not select the hold action when another key is pressed.
 			return false;
@@ -137,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	* ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤  ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤
 	* │ Ctrl │  Alt │  Win │  NUM │ NAV  │      │2Del  │  │2Play │      │  -   │   =  │   (  │   )  │RCTRL │
 	* └──────┴──────┴──────┴──────┴──────┤1BSpc ├──────┤  ├──────┤ 3Spc ├──────┴──────┴──────┴──────┴──────┘
-	*				     │      │3Alt  │  │1Enter│      │
+	*				     │      │3Alft  │  │1Enter│      │
 	*				     └──────┴──────┘  └──────┴──────┘
 	* Home Row Mods: To alt tab, use S + TAB on LTHUMB1.v
 	*
@@ -146,9 +149,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_MAC]	= LAYOUT(
 	KC_GRV,		KC_1,		KC_2,		KC_3,		KC_4,		KC_5,		KC_ESC,						KC_NO,		KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_DEL,
 	KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		TO(_MAC),					KC_NO,		KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSLS,
-	HYPESC,		M_A,		M_S,		M_D,		M_F,		KC_G,		TO(_WIN),					KC_F11,		KC_H,		M_J,		M_K,		M_L,		M_SEMI,		KC_QUOT,
-	KC_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		TO(_GAME),					KC_F12,		KC_N,		KC_M,		KC_COMMA,	KC_DOT,		KC_SLSH,	KC_RSFT,
-	KC_LCTL,	S(G(KC_GRV)),	S(C(KC_TAB)), 	C(KC_TAB),   	G(KC_GRV),	LTHUMB0,	LTHUMB1,	LTHUMB2,	RTHUMB2,	RTHUMB1,	RTHUMB0,	MINUS,		EQL,		APPLE,		BERRY,		TT(_SYM),
+	HYPESC,		M_A,		M_S,		M_D,		M_F,		KC_G,		TO(_WIN),					HYPR(KC_ENT),	KC_H,		M_J,		M_K,		M_L,		M_SEMI,		KC_QUOT,
+	OS_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		TO(_GAME),					HYPR(KC_SPC),	KC_N,		KC_M,		KC_COMMA,	KC_DOT,		KC_SLSH,	OS_RSFT,
+	TT(_NUM),	S(G(KC_GRV)),	S(C(KC_TAB)), 	C(KC_TAB),   	G(KC_GRV),	LTHUMB0,	LTHUMB1,	LTHUMB2,	RTHUMB2,	RTHUMB1,	RTHUMB0,	MINUS,		EQL,		APPLE,		BERRY,		TT(_SYM),
 	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,														KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO
 	),
 
@@ -167,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	C(KC_TAB),	A(KC_BSPC),	A(KC_LEFT),	KC_UP,		A(KC_RGHT),	A(KC_DEL),	_______,					_______,	KC_WH_U,	KC_WH_U,	KC_MS_U,	KC_WH_L,	KC_PGUP,	_______,
 	HYPESC,		G(KC_LEFT),	KC_LEFT,	KC_DOWN,	KC_RGHT,	G(KC_RGHT),	_______,					KC_F11,		KC_WH_L,	M_J,		M_K,		M_L,		M_SEMI,		_______,
 	KC_LSFT,	KC_HOME,	G(KC_DOWN),	KC_DEL,		G(KC_UP),	KC_END,		_______,					KC_F12,		KC_WH_D,	KC_WH_D,	KC_NO,		KC_NO,		KC_PGDN,	_______,
-	_______,	_______,	_______,	_______,	_______,	_______,	_______,	_______,	KC_BTN2,	MENU_BTN,	KC_BTN1,	KC_APP,		_______,	_______,	_______,	_______,
+	TO(_MAC),	_______,	_______,	_______,	_______,	_______,	_______,	_______,	KC_BTN2,	MENU_BTN,	KC_BTN1,	KC_APP,		_______,	_______,	_______,	TO(_MAC),
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 
@@ -185,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	_______,	KC_PAST,	KC_P7,		KC_P8,		KC_P9,		KC_MINS,	_______,					KC_NO,		KC_PERC,	KC_P7,		KC_P8,		KC_P9,		KC_COLN,	KC_K,
 	KC_NUM,		KC_KP_0,	KC_P4,		KC_P5,		KC_P6,		KC_PPLS,	_______,					RGB_MOD,	KC_PPLS,	KC_P4,		KC_P5,		KC_P6,		KC_MINS,	KC_PEQL,
 	_______,	KC_PSLS,	KC_P1,		KC_P2,		KC_P3,		KC_EQL,		_______,					RGB_RMOD,	KC_PAST,	KC_P1,		KC_P2,		KC_P3,		KC_PSLS,	S(KC_G),
-	_______,	KC_EQL,		KC_COMMA,	KC_KP_0,	KC_PDOT,	_______,	_______,	_______,	KC_PDOT,	MENU_BTN,	KC_KP_0,	KC_LPRN,	KC_LBRC,	KC_RBRC,	KC_RPRN,	KC_AT,
+	TO(_MAC),	KC_EQL,		KC_COMMA,	KC_KP_0,	KC_PDOT,	_______,	_______,	_______,	KC_PDOT,	MENU_BTN,	KC_KP_0,	KC_LPRN,	KC_LBRC,	KC_RBRC,	KC_RPRN,	TO(_MAC),
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 
@@ -213,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_EXLM,	KC_LCBR,	KC_QUOT,	KC_DQT,		KC_RCBR,	KC_QUES,	_______,					KC_NO,		KC_SCLN,	KC_LSFT,	KC_LCTL,	KC_LALT,	KC_LGUI,	KC_NO,
 	KC_HASH,	KC_CIRC,	KC_EQL,		KC_UNDS,	KC_DLR,		KC_ASTR,	_______,					_______,	KC_DOT,		KC_BSPC,	KC_TAB,		KC_SPC,		KC_ENT,		_______,
 	KC_TILD,	KC_LT,		KC_PIPE,	KC_MINS,	KC_GT,		KC_SLSH,	_______,					KC_NO,		KC_SLSH,	KC_DEL,		S(KC_TAB),	_______,	_______,	_______,
-	KC_AT,		KC_AMPR,	KC_LBRC,	KC_RBRC,	KC_PLUS,	KC_BSLS,	_______,	_______,	_______,	_______,	_______,	KC_LPRN,	KC_LBRC,	KC_RBRC,	KC_RPRN,	KC_NO,
+	TO(_MAC),	KC_AMPR,	KC_LBRC,	KC_RBRC,	KC_PLUS,	KC_BSLS,	_______,	_______,	_______,	_______,	_______,	KC_LPRN,	KC_LBRC,	KC_RBRC,	KC_RPRN,	TO(_MAC),
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 };
@@ -383,8 +386,10 @@ const key_override_t *key_overrides[] = { NULL };
 #ifdef TAPPING_TERM_PER_KEY
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case M_A: case M_S: case M_D: case M_F:
-        case M_J: case M_K: case M_L: case M_SEMI:
+        case M_S: case M_L:  // Only Alt keys get longer tapping term
+            return 350;  // Increased to make accidental Alt activation much harder
+        case M_A: case M_D: case M_F:  // Other left hand mods back to normal
+        case M_J: case M_K: case M_SEMI:  // Other right hand mods back to normal
             return 230;
         default:
             return TAPPING_TERM;
@@ -395,8 +400,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #ifdef PERMISSIVE_HOLD_PER_KEY
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case M_A: case M_S: case M_D: case M_F:
-        case M_J: case M_K: case M_L: case M_SEMI:
+        case M_S: case M_L:  // Only Alt keys have permissive hold disabled
+            return false;  // Disabled permissive hold to prevent accidental Alt activation
+        case M_A: case M_D: case M_F:  // Other left hand mods back to permissive
+        case M_J: case M_K: case M_SEMI:  // Other right hand mods back to permissive
             return true;
         default:
             return false;

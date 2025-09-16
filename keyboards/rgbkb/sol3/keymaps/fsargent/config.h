@@ -37,6 +37,7 @@
 #define MOUSEKEY_WHEEL_DECELERATED_MOVEMENTS	8	// Decelerated wheel movements
 
 
+#define TAPPING_TOGGLE 2
 #define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY
