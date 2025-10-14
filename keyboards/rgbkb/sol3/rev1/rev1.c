@@ -202,6 +202,7 @@ void render_touch_status(void)
     oled_write_P(PSTR(" "), false);
 }
 
+#ifdef AUDIO_ENABLE
 __attribute__((weak))
 void render_audio_status(void)
 {
@@ -214,6 +215,7 @@ void render_audio_status(void)
     oled_write_P(is_clicky_on() ? PSTR("Clicky")  : PSTR(" "), false);
     oled_write_P( is_music_on() ? PSTR("Music")  : PSTR(" "), false);
 }
+#endif
 
 oled_rotation_t oled_init_kb(oled_rotation_t rotation) {
     // Sol 3 uses OLED_ROTATION_270 for default rotation on both halves

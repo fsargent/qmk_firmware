@@ -215,7 +215,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             if (pressed) { layer_move(_WIN); }
             break;
         case TOGGAME:
-            if (pressed) { layer_move(_GAME); }
+            if (pressed) { layer_move(_MOUSE); }
             break;
         case QNM:
             if (pressed) { SEND_STRING("Felix Sargent"); }
@@ -230,13 +230,13 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             if (pressed) { SEND_STRING("felix.sargent@gmail.com"); }
             break;
         case WRK:
-            if (pressed) { SEND_STRING("fsargent@recruitbot.com"); }
+            if (pressed) { SEND_STRING("felix.sargent@snyk.io"); }
             break;
         case QP:
-            if (pressed) { SEND_STRING("4158606970"); }
+            if (pressed) { SEND_STRING("7709070111"); }
             break;
         case CAPS_TOGGLE:
-            if (pressed) { tap_code(KC_CAPS); }
+            if (pressed) { caps_word_toggle(); }
             break;
         case ONESHOT_SHIFT:
             if (pressed) { set_oneshot_mods(MOD_LSFT); }

@@ -39,7 +39,7 @@ enum sol_layers {
 	_MAC,
 	_WIN,
 	_NAV,
-	_GAME,
+	_MOUSE,
 	_NUM,
 	_WINNAV,
 	_MEH,
@@ -57,7 +57,7 @@ enum sol_keycodes {
 #define MEHESC		LT(_MEH, KC_ESC)
 #define HYPESC		MT(MOD_HYPR, KC_ESC)
 #define SYMTAB		LT(_NUM, KC_TAB)
-#define GAME		DF(_GAME)
+#define MOUSE		DF(_MOUSE)
 #define QWERTY		DF(_MAC)
 
 #define LBRC		MT(MOD_LALT, KC_LBRC)
@@ -73,7 +73,7 @@ enum sol_keycodes {
 #define LTHUMB2		OS_LSFT
 
 #define RTHUMB0		KC_SPC
-#define RTHUMB2		KC_ENT
+#define RTHUMB2		LT(_MOUSE, KC_ENT)
 #define RTHUMB1		KC_MPLY
 
 #define M_A	LCTL_T(KC_A)
@@ -138,9 +138,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	* ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤  ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤
 	* │Shift │   Z  │   X  │  C   │   V  │   B  │   [  │  │VOLDN │   N  │   M  │   ,  │   .  │   /  │Shift │
 	* ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤  ├──────┼──────┼──────┼──────┼──────┼──────┼──────┤
-	* │ Ctrl │  Alt │  Win │  NUM │ NAV  │      │2Del  │  │2Play │      │  -   │   =  │   (  │   )  │RCTRL │
+	* │ NUM  │  Alt │  Win │  NUM │ NAV  │      │2Del  │  │2Play │      │  -   │   =  │   (  │   )  │SYM   │
 	* └──────┴──────┴──────┴──────┴──────┤1BSpc ├──────┤  ├──────┤ 3Spc ├──────┴──────┴──────┴──────┴──────┘
-	*				     │      │3Alft  │  │1Enter│      │
+	*				     │      │3Shft │  │1Enter│      │
 	*				     └──────┴──────┘  └──────┴──────┘
 	* Home Row Mods: To alt tab, use S + TAB on LTHUMB1.v
 	*
@@ -150,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_GRV,		KC_1,		KC_2,		KC_3,		KC_4,		KC_5,		KC_ESC,						KC_NO,		KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_DEL,
 	KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		TO(_MAC),					KC_NO,		KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSLS,
 	HYPESC,		M_A,		M_S,		M_D,		M_F,		KC_G,		TO(_WIN),					HYPR(KC_ENT),	KC_H,		M_J,		M_K,		M_L,		M_SEMI,		KC_QUOT,
-	OS_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		TO(_GAME),					HYPR(KC_SPC),	KC_N,		KC_M,		KC_COMMA,	KC_DOT,		KC_SLSH,	OS_RSFT,
+	OS_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		TO(_MOUSE),					HYPR(KC_SPC),	KC_N,		KC_M,		KC_COMMA,	KC_DOT,		KC_SLSH,	OS_RSFT,
 	TT(_NUM),	S(G(KC_GRV)),	S(C(KC_TAB)), 	C(KC_TAB),   	G(KC_GRV),	LTHUMB0,	LTHUMB1,	LTHUMB2,	RTHUMB2,	RTHUMB1,	RTHUMB0,	MINUS,		EQL,		APPLE,		BERRY,		TT(_SYM),
 	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,														KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO
 	),
@@ -174,12 +174,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 
-	[_GAME]		= LAYOUT(
+	[_MOUSE]	= LAYOUT(
 	KC_GRV,		_______,	_______,	_______,	_______,	_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	KC_BSPC,
-	_______,	_______,	_______,	_______,	_______,	_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	_______,
-	KC_ESC,		KC_A,		KC_S,		KC_D,		KC_F,		_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	_______,
-	_______,	_______,	_______,	_______,	_______,	_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	_______,
-	_______,	_______,	_______,	_______,	MO(_WINNAV), KC_SPC,	LT(_NUM, KC_DEL),	 KC_LALT,	KC_ENT,		_______,	KC_SPC,		_______,	_______,	_______,	_______,	_______,
+	_______,	_______,	KC_WH_D,	KC_MS_U,	KC_WH_U,	_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	_______,
+	KC_ESC,		KC_WH_D,	KC_MS_L,	KC_MS_D,	KC_MS_R,	_______,	_______,					_______,	_______,	KC_ACL0,	KC_ACL1,	_______,	KC_ACL2,	_______,
+	_______,	KC_WH_U,	_______,	_______,	_______,	_______,	_______,					_______,	_______,	_______,	_______,	_______,	_______,	_______,
+	_______,	_______,	_______,	_______,	KC_BTN2, 	KC_BTN1,	LT(_NUM, KC_DEL),	 KC_LALT,	KC_ENT,		_______,	KC_SPC,		_______,	_______,	_______,	_______,	_______,
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 
@@ -205,9 +205,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_MEH] = LAYOUT(
 	_______,	MEH(KC_1),	MEH(KC_2),	MEH(KC_3),	MEH(KC_4),	MEH(KC_5),	TO(_MAC),					_______,	MEH(KC_6),	MEH(KC_7),	MEH(KC_8),	MEH(KC_9),	MEH(KC_0),	MEH(KC_MINS),
 	_______,	MEH(KC_Q),	MEH(KC_W),	MEH(KC_E),	MEH(KC_R),	MEH(KC_T),	TO(_WIN),					_______,	MEH(KC_Y),	MEH(KC_U),	MEH(KC_I),	MEH(KC_O),	MEH(KC_P),	MEH(KC_BSLS),
-	_______,	MEH(KC_A),	MEH(KC_S),	MEH(KC_D),	MEH(KC_F),	MEH(KC_G),	TO(_GAME),					KC_VOLU,	MEH(KC_H),	MEH(KC_J),	MEH(KC_K),	MEH(KC_L),	MEH(KC_SCLN),	MEH(KC_QUOT),
+	_______,	MEH(KC_A),	MEH(KC_S),	MEH(KC_D),	MEH(KC_F),	MEH(KC_G),	TO(_MOUSE),					KC_VOLU,	MEH(KC_H),	MEH(KC_J),	MEH(KC_K),	MEH(KC_L),	MEH(KC_SCLN),	MEH(KC_QUOT),
 	_______,	MEH(KC_Z),	MEH(KC_X),	MEH(KC_C),	MEH(KC_V),	MEH(KC_B),	_______,					KC_VOLD,	MEH(KC_N),	MEH(KC_M),	MEH(KC_COMM),	MEH(KC_DOT),	MEH(KC_SLSH),	MEH(KC_RSFT),
-	_______,	_______,	RGB_RMOD,	RGB_TOG,	RGB_MOD,	KC_LGUI,	KC_LALT,	KC_LCTL,	KC_MNXT,	KC_MPRV,	KC_MPLY,	TO(_MAC),	TO(_WIN),	TO(_GAME),	_______,	_______,
+	_______,	_______,	RGB_RMOD,	RGB_TOG,	RGB_MOD,	KC_LGUI,	KC_LALT,	KC_LCTL,	KC_MNXT,	KC_MPRV,	KC_MPLY,	TO(_MAC),	TO(_WIN),	TO(_MOUSE),	_______,	_______,
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 
@@ -216,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_EXLM,	KC_LCBR,	KC_QUOT,	KC_DQT,		KC_RCBR,	KC_QUES,	_______,					KC_NO,		KC_SCLN,	KC_LSFT,	KC_LCTL,	KC_LALT,	KC_LGUI,	KC_NO,
 	KC_HASH,	KC_CIRC,	KC_EQL,		KC_UNDS,	KC_DLR,		KC_ASTR,	_______,					_______,	KC_DOT,		KC_BSPC,	KC_TAB,		KC_SPC,		KC_ENT,		_______,
 	KC_TILD,	KC_LT,		KC_PIPE,	KC_MINS,	KC_GT,		KC_SLSH,	_______,					KC_NO,		KC_SLSH,	KC_DEL,		S(KC_TAB),	_______,	_______,	_______,
-	TO(_MAC),	KC_AMPR,	KC_LBRC,	KC_RBRC,	KC_PLUS,	KC_BSLS,	_______,	_______,	_______,	_______,	_______,	KC_LPRN,	KC_LBRC,	KC_RBRC,	KC_RPRN,	TO(_MAC),
+	TO(_MAC),	KC_AMPR,	KC_LBRC,	KC_RBRC,	KC_PLUS,	KC_BSLS,	_______,	_______,	KC_MNXT,	KC_MPRV,	KC_MPLY,	KC_LPRN,	KC_LBRC,	KC_RBRC,	KC_RPRN,	TO(_MAC),
 	_______,	_______,	_______,	_______,	_______,													_______,	_______,	_______,	_______,	_______
 	),
 };
@@ -267,8 +267,8 @@ void render_layer_status(void) {
 		case _NAV:
 			oled_write_ln_P(PSTR(" Nav "),	true);
 			break;
-		case _GAME:
-			oled_write_ln_P(PSTR(" Game"),	false);
+		case _MOUSE:
+			oled_write_ln_P(PSTR("Mouse"),	false);
 			break;
 		case _NUM:
 			oled_write_ln_P(PSTR(" Num "),	true);
@@ -359,7 +359,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 		ENCODER_CCW_CW(MENU_DN, MENU_UP), ENCODER_CCW_CW(MENU_DN, MENU_UP), ENCODER_CCW_CW(MENU_DN, MENU_UP),
 		ENCODER_CCW_CW(MENU_DN, MENU_UP), ENCODER_CCW_CW(MENU_DN, MENU_UP), ENCODER_CCW_CW(MENU_DN, MENU_UP)
 	},
-	[_GAME] = {
+	[_MOUSE] = {
 		ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU),
 		ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)
 	},
@@ -388,8 +388,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case M_S: case M_L:  // Only Alt keys get longer tapping term
             return 350;  // Increased to make accidental Alt activation much harder
-        case M_A: case M_D: case M_F:  // Other left hand mods back to normal
-        case M_J: case M_K: case M_SEMI:  // Other right hand mods back to normal
+        case M_F: case M_J:  // Shift keys - shorter for easier activation
+            return 180;  // Reduced to make shift activate faster
+        case M_A: case M_D:  // Other left hand mods
+        case M_K: case M_SEMI:  // Other right hand mods
             return 230;
         default:
             return TAPPING_TERM;

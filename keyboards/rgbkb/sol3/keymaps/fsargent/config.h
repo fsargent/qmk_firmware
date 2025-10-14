@@ -23,18 +23,36 @@
 
 #define STM32_ONBOARD_EEPROM_SIZE 2048
 
-#define MK_KINETIC_SPEED			true	// Enable kinetic mode
-#define MOUSEKEY_DELAY				5	// Delay between pressing a movement key and cursor movement
-#define MOUSEKEY_INTERVAL			10	// Time between cursor movements in milliseconds
-#define MOUSEKEY_MOVE_DELTA			16	// Step size for accelerating from initial to base speed
-#define MOUSEKEY_INITIAL_SPEED			750	// Initial speed of the cursor in pixel per second
-#define MOUSEKEY_BASE_SPEED			5000	// Maximum cursor speed at which acceleration stops
-#define MOUSEKEY_DECELERATED_SPEED		400	// Decelerated cursor speed
-#define MOUSEKEY_ACCELERATED_SPEED		3000	// Accelerated cursor speed
-#define MOUSEKEY_WHEEL_INITIAL_MOVEMENTS	4	// Initial number of movements of the mouse wheel
-#define MOUSEKEY_WHEEL_BASE_MOVEMENTS		16	// Maximum number of movements at which acceleration stops
-#define MOUSEKEY_WHEEL_ACCELERATED_MOVEMENTS	48	// Accelerated wheel movements
-#define MOUSEKEY_WHEEL_DECELERATED_MOVEMENTS	8	// Decelerated wheel movements
+// Mouse Keys - Constant Speed Mode (no acceleration by default)
+#define MK_3_SPEED
+#define MK_MOMENTARY_ACCEL
+
+// Speed settings: MS_ACL0 (j) = super fast, MS_ACL1 (k) = faster, unmodified = default, MS_ACL2 (;) = super slow
+// MS_ACL0 - Super fast
+#define MK_C_OFFSET_0       64      // Cursor offset per movement
+#define MK_C_INTERVAL_0     16      // Time between cursor movements
+
+// MS_ACL1 - Faster
+#define MK_C_OFFSET_1       32      // Cursor offset per movement
+#define MK_C_INTERVAL_1     16      // Time between cursor movements
+
+// Unmodified - Default medium speed (l key will use this)
+#define MK_C_OFFSET_UNMOD   16      // Cursor offset per movement
+#define MK_C_INTERVAL_UNMOD 16      // Time between cursor movements
+
+// MS_ACL2 - Super slow
+#define MK_C_OFFSET_2       4       // Cursor offset per movement
+#define MK_C_INTERVAL_2     32      // Time between cursor movements
+
+// Mouse wheel settings
+#define MK_W_OFFSET_0       1
+#define MK_W_INTERVAL_0     40
+#define MK_W_OFFSET_1       1
+#define MK_W_INTERVAL_1     80
+#define MK_W_OFFSET_UNMOD   1
+#define MK_W_INTERVAL_UNMOD 120
+#define MK_W_OFFSET_2       1
+#define MK_W_INTERVAL_2     240
 
 
 #define TAPPING_TOGGLE 2
