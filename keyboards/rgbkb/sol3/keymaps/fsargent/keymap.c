@@ -51,7 +51,14 @@ enum sol_keycodes {
 	MENU_BTN,
 	MENU_UP,
 	MENU_DN,
-	RGB_RST
+	RGB_RST,
+	// Hyper key combos (HYPR() overflows 16-bit keycode)
+	HY_F4,
+	HY_F5,
+	HY_F6,
+	HY_F7,
+	HY_ENT,
+	HY_SPC
 };
 
 #define MEHESC		LT(_MEH, KC_ESC)
@@ -147,10 +154,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	*/
 
 	[_MAC]	= LAYOUT(
-	KC_GRV,		KC_1,		KC_2,		KC_3,		KC_4,		KC_5,		KC_ESC,						KC_NO,		KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_DEL,
-	KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		TO(_MAC),					KC_NO,		KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSLS,
-	HYPESC,		M_A,		M_S,		M_D,		M_F,		KC_G,		TO(_WIN),					HYPR(KC_ENT),	KC_H,		M_J,		M_K,		M_L,		M_SEMI,		KC_QUOT,
-	OS_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		TO(_MOUSE),					HYPR(KC_SPC),	KC_N,		KC_M,		KC_COMMA,	KC_DOT,		KC_SLSH,	OS_RSFT,
+	KC_GRV,		KC_1,		KC_2,		KC_3,		KC_4,		KC_5,		HY_F6,						KC_NO,		KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_DEL,
+	KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		HY_F5,						KC_NO,		KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSLS,
+	HYPESC,		M_A,		M_S,		M_D,		M_F,		KC_G,		HY_F7,						HY_ENT,		KC_H,		M_J,		M_K,		M_L,		M_SEMI,		KC_QUOT,
+	OS_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		HY_F4,						HY_SPC,		KC_N,		KC_M,		KC_COMMA,	KC_DOT,		KC_SLSH,	OS_RSFT,
 	TT(_NUM),	S(G(KC_GRV)),	S(C(KC_TAB)), 	C(KC_TAB),   	G(KC_GRV),	LTHUMB0,	LTHUMB1,	LTHUMB2,	RTHUMB2,	RTHUMB1,	RTHUMB0,	MINUS,		EQL,		APPLE,		BERRY,		TT(_SYM),
 	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,														KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO
 	),
@@ -249,6 +256,60 @@ bool process_record_user(uint16_t keycode,	keyrecord_t *record) {
 				touch_encoder_toggle();
 			}
 			return false;	// Skip all further processing of this key
+		case HY_F4:
+			if (record->event.pressed) {
+				register_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+				register_code(KC_F4);
+			} else {
+				unregister_code(KC_F4);
+				unregister_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+			}
+			return false;
+		case HY_F5:
+			if (record->event.pressed) {
+				register_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+				register_code(KC_F5);
+			} else {
+				unregister_code(KC_F5);
+				unregister_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+			}
+			return false;
+		case HY_F6:
+			if (record->event.pressed) {
+				register_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+				register_code(KC_F6);
+			} else {
+				unregister_code(KC_F6);
+				unregister_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+			}
+			return false;
+		case HY_F7:
+			if (record->event.pressed) {
+				register_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+				register_code(KC_F7);
+			} else {
+				unregister_code(KC_F7);
+				unregister_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+			}
+			return false;
+		case HY_ENT:
+			if (record->event.pressed) {
+				register_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+				register_code(KC_ENT);
+			} else {
+				unregister_code(KC_ENT);
+				unregister_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+			}
+			return false;
+		case HY_SPC:
+			if (record->event.pressed) {
+				register_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+				register_code(KC_SPC);
+			} else {
+				unregister_code(KC_SPC);
+				unregister_mods(MOD_BIT(KC_LCTL) | MOD_BIT(KC_LSFT) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI));
+			}
+			return false;
 		default:
 			return true;
 	}
