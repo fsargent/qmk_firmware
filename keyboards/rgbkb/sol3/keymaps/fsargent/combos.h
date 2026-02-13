@@ -14,7 +14,8 @@ enum combo_events {
     QIN,
     KL,
     QNM,
-    EML, WRK,
+    EML,
+    WRK,
     QP,
     TAB,
     THUMB_NUM,
@@ -22,6 +23,7 @@ enum combo_events {
     M_COMMA_MINUS,
     DOT_COMMA_EQL,
     CAPS_TOGGLE,
+    CAPS_LOCK_TOGGLE,
     ONESHOT_SHIFT,
     COMBO_LENGTH
 };
@@ -49,6 +51,7 @@ const uint16_t PROGMEM sd_combo[]		= {M_S, M_D, COMBO_END};
 const uint16_t PROGMEM m_comma_combo[]		= {KC_M, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM dot_comma_combo[]	= {KC_DOT, KC_COMMA, COMBO_END};
 const uint16_t PROGMEM j_semi_combo[]		= {M_J, M_SEMI, COMBO_END};
+const uint16_t PROGMEM jklsemi_combo[]		= {M_J, M_K, M_L, M_SEMI, COMBO_END};
 const uint16_t PROGMEM thumb12_combo[]		= {LTHUMB1, LTHUMB2, COMBO_END};
 
 const uint16_t PROGMEM xcv_combo[]		= {KC_X, KC_C, KC_V, COMBO_END};
@@ -56,7 +59,7 @@ const uint16_t PROGMEM sdf_combo[]		= {LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F),
 const uint16_t PROGMEM df_combo[]		= {M_D, M_F, COMBO_END};
 
 const uint16_t PROGMEM cal_combo[]		= {KC_C, M_A, M_L, COMBO_END};
-const uint16_t PROGMEM phone_combo[]	= {KC_P, KC_Q, COMBO_END};
+const uint16_t PROGMEM phone_combo[]		= {KC_P, KC_Q, COMBO_END};
 const uint16_t PROGMEM qnm_combo[]		= {KC_Q, KC_N, KC_M, COMBO_END};
 const uint16_t PROGMEM qin_combo[]		= {KC_Q, KC_I, KC_N, COMBO_END};
 const uint16_t PROGMEM eml_combo[]		= {KC_E, KC_M, M_L, COMBO_END};
@@ -88,6 +91,7 @@ combo_t key_combos[]	= {
     [TOGGAME]	= COMBO_ACTION(toggame_combo),
     [TOGWIN]	= COMBO_ACTION(togwin_combo),
     [CAPS_TOGGLE] = COMBO_ACTION(j_semi_combo),
+    [CAPS_LOCK_TOGGLE] = COMBO_ACTION(jklsemi_combo),
     [ONESHOT_SHIFT] = COMBO_ACTION(thumb12_combo),
 
     // 3–4 key actions
@@ -237,6 +241,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             break;
         case CAPS_TOGGLE:
             if (pressed) { caps_word_toggle(); }
+            break;
+        case CAPS_LOCK_TOGGLE:
+            if (pressed) { tap_code(KC_CAPS); }
             break;
         case ONESHOT_SHIFT:
             if (pressed) { set_oneshot_mods(MOD_LSFT); }

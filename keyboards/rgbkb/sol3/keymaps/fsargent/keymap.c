@@ -12,6 +12,7 @@
 
 #include QMK_KEYBOARD_H
 #include "os_detection.h"
+#include <stdbool.h>
 
 /* Qwerty
 * ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┐ 			 ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┐
@@ -131,7 +132,9 @@ static void send_os_delete_word(void) {
     }
 }
 
-#include "combos.c"
+#define FSARGENT_KEYMAP_CONTEXT
+#include "combos.h"
+#undef FSARGENT_KEYMAP_CONTEXT
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
